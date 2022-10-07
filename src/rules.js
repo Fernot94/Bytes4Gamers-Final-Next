@@ -1,4 +1,4 @@
-/* export {
+export {
     isStraightFlush,
     isFourOfAKind,
     isFullHouse,
@@ -8,7 +8,7 @@
     isTwoPair,
     isPair,
     getForce
-} */
+} 
 
 function isStraightFlush(communityCards, playerCards) {
     return isFlush(communityCards, playerCards) && haveStraight(communityCards, playerCards)

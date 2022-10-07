@@ -1,6 +1,15 @@
+import { getForce } from "./rules"
+
+export {
+    getWinners,
+    isDraw
+}
+
+
 //recebe cartas comunitarias e um array das cartas dos jogadores e retorna um array dos vencedores
-function getWinners(communityCards, playersCards){
-    
+function getWinners(communityCards, playersCards) {
+    const highHand = playersCards.reduce((acc, cards) => getWinner2Players(communityCards, acc, cards) === 1 ? acc : cards)
+    return playersCards.filter(cards => getWinner2Players(communityCards, highHand, cards) === 0)
 }
 
 //Compara dois jogadores e retorna qual o vencedor, se for empate retorna 0
@@ -162,19 +171,27 @@ const community = [
     { value: 9, suit: "a" },
     { value: 5, suit: "a" }
 ]
-const player1 = [
-    { value: 2, suit: "a" },
-    { value: 8, suit: "a" }
-]
-const player2 = [
-    { value: 1, suit: "a" },
-    { value: 13, suit: "a" }
+const players = [
+    player1 = {
+        card1: { value: 2, suit: "hearts" },
+        card2: { value: 8, suit: "spades" }
+    },
+    player2 = {
+        card1: { value: 1, suit: "spades" },
+        card2: { value: 13, suit: "spades" }
+    },
+    player3 = {
+        card1: { value: 1, suit: "clubs" },
+        card2: { value: 1, suit: "diamonds" }
+    },
+    player4 = {
+        card1: { value: 12, suit: "diamonds" },
+        card2: { value: 13, suit: "diamonds" }
+    },
+    player5 = {
+        card1: { value: 7, suit: "clubs" },
+        card2: { value: 7, suit: "spades" }
+    }
 ]
 
-console.log(isDraw(community, player1, player2, 8))
-
-/* 
-export {
-    getWinner,
-    isDraw
-} */
+console.log(getWinners(community, players))
