@@ -1,13 +1,7 @@
-import { getForce } from "./rules"
-
-export {
-    getWinners,
-    isDraw
-}
-
+import { getForce, handToString } from "./rules"
 
 //recebe cartas comunitarias e um array das cartas dos jogadores e retorna um array dos vencedores
-function getWinners(communityCards, playersCards) {
+export function getWinners(communityCards, playersCards) {
     const highHand = playersCards.reduce((acc, cards) => getWinner2Players(communityCards, acc, cards) === 1 ? acc : cards)
     return playersCards.filter(cards => getWinner2Players(communityCards, highHand, cards) === 0)
 }
@@ -163,35 +157,3 @@ function highStraightFlush(oneCards, twoCards) {
     }
     return 0
 }
-
-const community = [
-    { value: 5, suit: "spades" },
-    { value: 10, suit: "diamonds" },
-    { value: 1, suit: "diamonds" },
-    { value: 9, suit: "diamonds" },
-    { value: 5, suit: "clubs" }
-]
-const players = [
-    {
-        card1: { value: 2, suit: "hearts" },
-        card2: { value: 8, suit: "spades" }
-    },
-    {
-        card1: { value: 1, suit: "spades" },
-        card2: { value: 13, suit: "spades" }
-    },
-    {
-        card1: { value: 1, suit: "clubs" },
-        card2: { value: 1, suit: "diamonds" }
-    },
-    {
-        card1: { value: 12, suit: "diamonds" },
-        card2: { value: 13, suit: "diamonds" }
-    },
-    {
-        card1: { value: 7, suit: "clubs" },
-        card2: { value: 7, suit: "spades" }
-    }
-]
-
-console.log(getWinners(community, players))

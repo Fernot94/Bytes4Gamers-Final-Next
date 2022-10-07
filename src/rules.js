@@ -1,14 +1,4 @@
-export {
-    isStraightFlush,
-    isFourOfAKind,
-    isFullHouse,
-    isFlush,
-    isStraight,
-    isThreeOfAKind,
-    isTwoPair,
-    isPair,
-    getForce
-} 
+
 
 function isStraightFlush(communityCards, playerCards) {
     return isFlush(communityCards, playerCards) && haveStraight(communityCards, playerCards)
@@ -77,7 +67,7 @@ function havePair(communityCards, playerCards) {
 }
 
 //Retorna a força da mão de um jogador, varia de 0 a 8
-function getForce(communityCards, playerCards) {
+export function getForce(communityCards, playerCards) {
     if (isStraightFlush(communityCards, playerCards))
         return 8
     if (isFourOfAKind(communityCards, playerCards))
@@ -97,21 +87,17 @@ function getForce(communityCards, playerCards) {
     return 0
 }
 
-const community = [
-    { value: 3, suit: "a" },
-    { value: 5, suit: "b" },
-    { value: 7, suit: "c" },
-    { value: 10, suit: "d" },
-    { value: 9, suit: "e" }
-]
-const player1 = [
-    { value: 1, suit: "e" },
-    { value: 2, suit: "q" }
-]
-const player2 = [
-    { value: 13, suit: "a" },
-    { value: 12, suit: "j" }
-]
+export function handToString(communityCards, playerCards) {
+    if (isStraightFlush(communityCards, playerCards)) return "Straight Flush"
+    if (isFourOfAKind(communityCards, playerCards)) return "For of a Kind"
+    if (isFullHouse(communityCards, playerCards)) return "FullHouse"
+    if (isFlush(communityCards, playerCards)) return "Flush"
+    if (isStraight(communityCards, playerCards)) return "Straight"
+    if (isThreeOfAKind(communityCards, playerCards)) return "Three of a Kind"
+    if (isTwoPair(communityCards, playerCards)) return "Two Pair"
+    if (isPair(communityCards, playerCards)) return "Pair"
+    return "High Card"
+}
 
 /* console.log({
     StraightFlush: isStraightFlush(community, player),
@@ -124,4 +110,3 @@ const player2 = [
     Pair: isPair(community, player)
 }) */
 
-console.log(isDraw(community, player1, player2, getForce(community, player1)))
