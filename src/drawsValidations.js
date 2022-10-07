@@ -165,30 +165,30 @@ function highStraightFlush(oneCards, twoCards) {
 }
 
 const community = [
-    { value: 12, suit: "a" },
-    { value: 11, suit: "a" },
-    { value: 10, suit: "a" },
-    { value: 9, suit: "a" },
-    { value: 5, suit: "a" }
+    { value: 5, suit: "spades" },
+    { value: 10, suit: "diamonds" },
+    { value: 1, suit: "diamonds" },
+    { value: 9, suit: "diamonds" },
+    { value: 5, suit: "clubs" }
 ]
 const players = [
-    player1 = {
+    {
         card1: { value: 2, suit: "hearts" },
         card2: { value: 8, suit: "spades" }
     },
-    player2 = {
+    {
         card1: { value: 1, suit: "spades" },
         card2: { value: 13, suit: "spades" }
     },
-    player3 = {
+    {
         card1: { value: 1, suit: "clubs" },
         card2: { value: 1, suit: "diamonds" }
     },
-    player4 = {
+    {
         card1: { value: 12, suit: "diamonds" },
         card2: { value: 13, suit: "diamonds" }
     },
-    player5 = {
+    {
         card1: { value: 7, suit: "clubs" },
         card2: { value: 7, suit: "spades" }
     }
