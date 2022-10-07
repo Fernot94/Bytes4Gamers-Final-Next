@@ -1,8 +1,11 @@
 import { useState } from "react";
 
 export default function Dummy() {
-  const [numero, setNumero] = useState(0);
   const [jogadores, setJogadores] = useState([]);
+  const [deck, setDeck] = useState([]);
+
+  const shuffle = () => {};
+  const deal = () => {};
 
   const adicionaJogador = () => {
     setJogadores((prev) => [...prev, prev.length + 1]);
@@ -12,11 +15,15 @@ export default function Dummy() {
     <div className="main">
       <div className="table">
         {jogadores.map((player, i) => (
-          <div key={i}>{player}</div>
+          <div key={i}>
+            {player.value === undefined
+              ? ""
+              : "${player.value}, ${player.suit}"}
+          </div>
         ))}
       </div>
+
       <button onClick={() => adicionaJogador()}>Adiciona Jogador</button>
-      <p>{jogadores}</p>
     </div>
   );
 }
