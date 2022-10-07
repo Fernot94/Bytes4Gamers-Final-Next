@@ -1,3 +1,15 @@
+/* export {
+    isStraightFlush,
+    isFourOfAKind,
+    isFullHouse,
+    isFlush,
+    isStraight,
+    isThreeOfAKind,
+    isTwoPair,
+    isPair,
+    getForce
+} */
+
 function isStraightFlush(communityCards, playerCards) {
     return isFlush(communityCards, playerCards) && haveStraight(communityCards, playerCards)
 }
@@ -64,39 +76,6 @@ function havePair(communityCards, playerCards) {
         .some((card, i, allCards) => allCards.filter(e => e.value === card.value).length === 2)
 }
 
-//Compara dois jogadores e retorna qual o vencedor, se for empate retorna 0
-function getWinner(communityCards, playerOneCards, playerTwoCards) {
-    const forceOne = getForce(communityCards, playerOneCards)
-    const forceTwo = getForce(communityCards, playerTwoCards)
-    if (forceOne === forceTwo)
-        return isDraw(communityCards, playerOneCards, playerTwoCards, forceOne)
-    if (forceOne > forceTwo)
-        return 1
-    return 2
-}
-
-//Se playerOne venceu return 1, se playerTwo venceu return 2, se for empate retorna 0
-function isDraw(communityCards, playerOneCards, playerTwoCards, force) {
-    const oneCards = communityCards.concat(playerOneCards).map(e => e.value === 1 ? { ...e, value: 14 } : e).sort((a, b) => b.value - a.value)
-    const twoCards = communityCards.concat(playerTwoCards).map(e => e.value === 1 ? { ...e, value: 14 } : e).sort((a, b) => b.value - a.value)
-    switch (force) {
-        case 0:
-            return highCard(5, oneCards, twoCards)
-        case 1:
-            
-    }
-}
-
-function highCard(totalCards, oneCards, twoCards) {
-    for (let i = 0; i < totalCards; i++) {
-        if (oneCards[i].value > twoCards[i].value)
-            return 1
-        else if (oneCards[i].value < twoCards[i].value)
-            return 2
-    }
-    return 0
-}
-
 //Retorna a força da mão de um jogador, varia de 0 a 8
 function getForce(communityCards, playerCards) {
     if (isStraightFlush(communityCards, playerCards))
@@ -117,12 +96,6 @@ function getForce(communityCards, playerCards) {
         return 1
     return 0
 }
-
-/* [{}, {}, {}].reduce((acc, curr) => {
-    if (curr ganhou ao acc) {å
-        curr passa a ser o acc
-    }
-}) */
 
 const community = [
     { value: 3, suit: "a" },
