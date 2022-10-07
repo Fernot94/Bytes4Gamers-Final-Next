@@ -1,7 +1,12 @@
 
 
 function isStraightFlush(communityCards, playerCards) {
-    return isFlush(communityCards, playerCards) && haveStraight(communityCards, playerCards)
+    let flush = []
+    const allCards = communityCards.concat(playerCards)
+    if(isFlush(communityCards, playerCards))
+        flush = allCards.filter(card => allCards.filter(e => e.suit === card.suit).length >= 5)
+    console.log(flush)
+    return haveStraight([], flush)
 }
 
 function isFourOfAKind(communityCards, playerCards) {
@@ -31,7 +36,7 @@ function isThreeOfAKind(communityCards, playerCards) {
 function isTwoPair(communityCards, playerCards) {
     return communityCards
         .concat(playerCards)
-        .filter((card, i, allCards) => allCards.filter(e => e.value === card.value).length === 2).length === 4 && !isFlush(communityCards, playerCards)
+        .filter((card, i, allCards) => allCards.filter(e => e.value === card.value).length === 2).length >= 4 && !isFlush(communityCards, playerCards)
 }
 
 function isPair(communityCards, playerCards) {
