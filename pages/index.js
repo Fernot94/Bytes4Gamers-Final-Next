@@ -30,6 +30,7 @@ export default function Main() {
       </div>
       <div className="bottom">
         <Foot />
+        <Donations />
       </div>
     </div>
   );
