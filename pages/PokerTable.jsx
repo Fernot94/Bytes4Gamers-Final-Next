@@ -3,19 +3,18 @@ import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 
-/* DEBUGGING 
-const community = [
+/* const community = [
   { value: 1, suit: "diamonds" },
   { value: 2, suit: "diamonds" },
-  { value: 12, suit: "diamonds" },
   { value: 4, suit: "diamonds" },
+  { value: 6, suit: "diamonds" },
   { value: 5, suit: "diamonds" }
 ]
 const player = [
-    { value: 3, suit: "diamonds" },
-    { value: 7, suit: "diamonds" }
-  ] 
- */
+    { value: 13, suit: "diamonds" },
+    { value: 3, suit: "diamonds" }
+  ] */
+
 const DECK_DEFAULT = [
   { value: 1, suit: "hearts" },
   { value: 2, suit: "hearts" },
@@ -71,7 +70,7 @@ const DECK_DEFAULT = [
   { value: 13, suit: "diamonds" }
 ];
 
-export default function Dummy() {
+export default function PokerTable() {
   const [jogadores, setJogadores] = useState([]);
   const [vencedoresRodada, setVencedoresRodada] = useState([]);
   const [deck, setDeck] = useState(DECK_DEFAULT);

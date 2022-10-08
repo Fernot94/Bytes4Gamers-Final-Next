@@ -1,11 +1,18 @@
 
+function isRoyalStraightFlush(communityCards, playerCards) {
+    const royals = [13, 12, 11, 10, 1]
+    let flush = []
+    const allCards = communityCards.concat(playerCards)
+    if(isFlush(communityCards, playerCards))
+        flush = allCards.filter(card => allCards.filter(e => e.suit === card.suit).length >= 5)
+    return flush.filter(card => royals.includes(card.value)).length === 5
+}
 
 function isStraightFlush(communityCards, playerCards) {
     let flush = []
     const allCards = communityCards.concat(playerCards)
     if(isFlush(communityCards, playerCards))
         flush = allCards.filter(card => allCards.filter(e => e.suit === card.suit).length >= 5)
-    console.log(flush)
     return haveStraight([], flush)
 }
 
@@ -93,6 +100,7 @@ export function getForce(communityCards, playerCards) {
 }
 
 export function handToString(communityCards, playerCards) {
+    if (isRoyalStraightFlush(communityCards, playerCards)) return "Royal Straight Flush"
     if (isStraightFlush(communityCards, playerCards)) return "Straight Flush"
     if (isFourOfAKind(communityCards, playerCards)) return "For of a Kind"
     if (isFullHouse(communityCards, playerCards)) return "FullHouse"
