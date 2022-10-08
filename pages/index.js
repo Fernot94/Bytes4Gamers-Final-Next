@@ -8,12 +8,13 @@ import PokerRules from "./PokerRules";
 import Menu from "./Menu";
 import Foot from "./Foot";
 import Home from "./Home";
+import Donations from "./donations";
 
 export default function Main() {
   const [page, setPage] = useState("Home");
 
-  function changePage(pageName){
-    setPage(pageName)
+  function changePage(pageName) {
+    setPage(pageName);
   }
 
   return (
