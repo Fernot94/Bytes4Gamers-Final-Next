@@ -24,3 +24,116 @@ a {
     background: black;
   }
 }
+
+
+/* Poker Rules */
+.learn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.handRanking{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hands{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 70px;
+  column-gap: 20px;
+}
+
+.handExemple{
+  width: 30vw;
+}
+
+/* ------------END-------------- */
+
+/* Poker */
+.mainPoker{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  --size: 6vw;
+  width: var(--size);
+  height: calc(var(--size) * 726 / 500);
+}
+
+.card2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  --size: 6vw;
+  width: var(--size);
+  height: calc(var(--size) * 726 / 500);
+}
+.communityCards{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.communityCard{
+  background-repeat: no-repeat;
+  background-size: contain;
+  --size: 6vw;
+  width: var(--size);
+  height: calc(var(--size) * 726 / 500);
+}
+
+.players{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  gap: 20px;
+}
+
+.player{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.table{
+  background-image: url("/poker-table.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  --size: 80vw;
+  width: var(--size);
+  height: calc(var(--size) * 357 / 612);
+}
+/* ------------END-------------- */
+
+/* Footer */
+.bottom{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* ------------END-------------- */

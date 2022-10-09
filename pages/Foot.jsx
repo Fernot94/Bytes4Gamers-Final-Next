@@ -8,7 +8,14 @@ export default function Foot() {
 
   return (
     <div>
-      <p>Copyright se me roubar vou te cobrar</p>
+      <p>Copyright Bytes4Gamers</p>
+      <p>Create by:</p>
+      <ul>
+        <li>Mauro Serrano</li>
+        <li>Fernado Abreu</li>
+        <li>Diogo ?????</li>
+        <li>Gabriel ?????</li>
+      </ul>
     </div>
   );
 }
