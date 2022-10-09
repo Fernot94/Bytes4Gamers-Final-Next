@@ -58,19 +58,23 @@ const DECK_DEFAULT = [
   { value: 13, suit: "diamonds" }
 ];
 const DECK_DEBUGGING = [
-  { value: 13, suit: "diamonds" },
-  { value: 13, suit: "clubs" },
-  { value: 3, suit: "hearts" },
-  { value: 4, suit: "spades" },
-  { value: 5, suit: "hearts" },
-  { value: 7, suit: "hearts" },
-  { value: 8, suit: "clubs" },
-  { value: 9, suit: "hearts" },
-  { value: 10, suit: "spades" },
-  { value: 11, suit: "hearts" },
-  { value: 12, suit: "spades" },
+  { value: 13, suit: "spades" },
+  { value: 10, suit: "clubs" },
+  { value: 2, suit: "spades" },
+  { value: 3, suit: "spades" },
+  { value: 10, suit: "diamonds" },
+  { value: 11, suit: "diamonds" },
+  { value: 7, suit: "spades" },
+  { value: 3, suit: "clubs" },
+  { value: 11, suit: "clubs" },
   { value: 6, suit: "diamonds" },
-  { value: 1, suit: "hearts" }
+  { value: 5, suit: "spades" },
+  { value: 12, suit: "diamonds" },
+  { value: 1, suit: "clubs" },
+  { value: 12, suit: "spades" },
+  { value: 13, suit: "hearts" },
+  { value: 2, suit: "diamonds" },
+  { value: 13, suit: "diamonds" }
 ]
 const PLAYER_DEFAULT = { username: "Player", cards: ["", ""], chips: 999999 }
 export default function PokerTable() {
@@ -104,16 +108,18 @@ export default function PokerTable() {
   };
 
   const vencedor = () => {
-    console.log(getWinners(communityCards, jogadores.map(player => player.cards)))
     setVencedoresRodada(getWinners(communityCards, jogadores.map(player => player.cards)))
   };
 
   const getPlayerUsername = (cards) => {
-    return jogadores.find(player => player.cards[0].value === cards[0].value && player.cards[0].suit === cards[0].suit && player.cards[1].value === cards[1].value && player.cards[1].suit === cards[1].suit).username
+    return jogadores.find(player => player.cards[0]?.value === cards[0]?.value && player.cards[0]?.suit === cards[0]?.suit && player.cards[1]?.value === cards[1]?.value && player.cards[1]?.suit === cards[1]?.suit)?.username
   }
 
   const resetRound = () => {
-
+    setVencedoresRodada([])
+    setCommunityCards([])
+    setJogadores(prev => prev.map(player => ({ ...player, cards: ["", ""] })))
+    shuffle()
   }
 
   return (
@@ -140,7 +146,7 @@ export default function PokerTable() {
         <button onClick={() => deal()}>Deal</button>
         <button onClick={() => dealCommunits()}>Deal Communits</button>
         <button onClick={() => vencedor()}>Vencedor</button>
-        <button>Remover Jogador</button>
+        <button onClick={() => resetRound()}>Reset</button>
       </div>
       {vencedoresRodada.length !== 0 && <div>Vencerdor(es): {vencedoresRodada.map((vencedor, i) => <p key={i} >{`${getPlayerUsername(vencedor)} ${handToString(communityCards, vencedor)}`}</p>)}</div>}
     </div>

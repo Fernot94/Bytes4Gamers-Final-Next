@@ -18,7 +18,7 @@ export default function Main() {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className="top">
         <Menu pageFunction={changePage} />
       </div>

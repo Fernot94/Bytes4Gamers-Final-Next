@@ -7,8 +7,9 @@ import { handToString } from "../src/rules";
 export default function Home(props) {
 
   return (
-    <div>
-      <button onClick={() => props.pageFunction("PokerMenu")}>Poker</button>
+    <div className="mainHome">
+      <h2>Games</h2>
+        <img src="/game-poker.webp" alt="Poker Game" className="gamePokerImg" onClick={() => props.pageFunction("PokerMenu")} />
     </div>
   );
 }

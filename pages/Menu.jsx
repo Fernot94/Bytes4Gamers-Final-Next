@@ -7,8 +7,8 @@ import { handToString } from "../src/rules";
 export default function Menu(props) {
 
   return (
-    <div>
-      <div>
+    <div className="menu">
+      <div className="abas">
         <button onClick={() => props.pageFunction("Home")} >Home</button>
         <button onClick={() => props.pageFunction("Games")} >Games</button>
         <button onClick={() => props.pageFunction("Ranking")} >Ranking</button>

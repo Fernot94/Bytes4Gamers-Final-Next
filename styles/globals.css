@@ -19,50 +19,106 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
 }
 
+/* Menu */
+
+.menu {
+  background-image: url("/gold-cards-and-chips.jpg");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 120px;
+}
+
+.abas{
+  position: fixed;
+  top: 60px;
+  left: 50px;
+}
+/* ------------END-------------- */
+
+/* Home */
+
+.mainHome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.gamePokerImg {
+  border-radius: 25px;
+  width: 400px;
+  cursor: pointer;
+}
+
+
+.gamePokerImg:hover {
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* ------------END-------------- */
 
 /* Poker Rules */
-.learn{
+.learn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.handRanking{
+.handRanking {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.hands{
+.hands {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 70px;
   column-gap: 20px;
 }
 
-.handExemple{
+.handExemple {
   width: 30vw;
+}
+
+.mainPokerRules {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.howToPlayImg {
+  height: 280px;
 }
 
 /* ------------END-------------- */
 
 /* Poker */
-.mainPoker{
+.mainPoker {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.card1{
+.card1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,7 +130,7 @@ a {
   height: calc(var(--size) * 726 / 500);
 }
 
-.card2{
+.card2 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,14 +141,16 @@ a {
   width: var(--size);
   height: calc(var(--size) * 726 / 500);
 }
-.communityCards{
+
+.communityCards {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
-.communityCard{
+
+.communityCard {
   background-repeat: no-repeat;
   background-size: contain;
   --size: 6vw;
@@ -100,7 +158,7 @@ a {
   height: calc(var(--size) * 726 / 500);
 }
 
-.players{
+.players {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -109,13 +167,13 @@ a {
   gap: 20px;
 }
 
-.player{
+.player {
   display: flex;
   flex-direction: row;
   gap: 8px;
 }
 
-.table{
+.table {
   background-image: url("/poker-table.png");
   display: flex;
   flex-direction: column;
@@ -127,13 +185,15 @@ a {
   width: var(--size);
   height: calc(var(--size) * 357 / 612);
 }
+
 /* ------------END-------------- */
 
 /* Footer */
-.bottom{
+.bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 /* ------------END-------------- */

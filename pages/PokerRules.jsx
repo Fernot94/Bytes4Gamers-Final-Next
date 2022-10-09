@@ -9,6 +9,7 @@ export default function PokerRules() {
 
   return (
     <div className="mainPokerRules">
+      <img className="howToPlayImg" src="/how-to-play.jpg" alt="How to play" />
       <div className="learn">
         <h2>Learn how to play poker</h2>
         <p>Whether you are new to the game of poker, or just need a refresher, PokerStars has what you need to learn how to play.</p>

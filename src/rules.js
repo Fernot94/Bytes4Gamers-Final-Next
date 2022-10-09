@@ -51,10 +51,10 @@ function isPair(communityCards, playerCards) {
 }
 
 function haveStraight(communityCards, playerCards) {
-    const allCards = communityCards.concat(playerCards).sort((a, b) => a.value - b.value)
+    const allCards = [...new Set(communityCards.concat(playerCards).sort((a, b) => a.value - b.value).map(card => card.value))]
     let counter = 0
     for (let i = 0; i < allCards.length; i++) {
-        if ((allCards[i].value === 13 && allCards[0].value === 1) || allCards[i].value === allCards[i + 1]?.value - 1) {
+        if ((allCards[i] === 13 && allCards[0] === 1) || allCards[i] === allCards[i + 1] - 1) {
             counter++
             if (counter >= 4)
                 return true
@@ -111,15 +111,3 @@ export function handToString(communityCards, playerCards) {
     if (isPair(communityCards, playerCards)) return "Pair"
     return "High Card"
 }
-
-/* console.log({
-    StraightFlush: isStraightFlush(community, player),
-    FourOfAKind: isFourOfAKind(community, player),
-    FullHouse: isFullHouse(community, player),
-    Flush: isFlush(community, player),
-    Straight: isStraight(community, player),
-    ThreeOfAKind: isThreeOfAKind(community, player),
-    TwoPair: isTwoPair(community, player),
-    Pair: isPair(community, player)
-}) */
-
