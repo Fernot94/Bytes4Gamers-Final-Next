@@ -4,11 +4,13 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import PokerTable from "./PokerTable";
 import PokerMenu from "./PokerMenu";
-import PokerRules from "./PokerRules";
+import HowToPlay from "./HowToPlay";
 import Menu from "./Menu";
 import Foot from "./Foot";
 import Home from "./Home";
-import Donations from "./donations";
+import AboutUs from "./AboutUs";
+import Rules from "./Rules";
+import SignUp from "./SignUp";
 
 export default function Main() {
   const [page, setPage] = useState("Home");
@@ -20,17 +22,19 @@ export default function Main() {
   return (
     <div>
       <div className="top">
-        <Menu pageFunction={changePage} />
+        <Menu pageFunction={changePage} page={page} />
       </div>
       <div className="middle">
         {page === "Home" && <Home pageFunction={changePage} />}
         {page === "PokerMenu" && <PokerMenu pageFunction={changePage} />}
         {page === "PokerTable" && <PokerTable />}
-        {page === "PokerRules" && <PokerRules />}
+        {page === "HowToPlay" && <HowToPlay />}
+        {page === "AboutUs" && <AboutUs />}
+        {page === "Rules" && <Rules />}
+        {page === "SignUp" && <SignUp />}
       </div>
       <div className="bottom">
         <Foot />
-        <Donations />
       </div>
     </div>
   );

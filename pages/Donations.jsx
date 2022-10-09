@@ -1,6 +1,9 @@
 export default function Donations() {
   return (
-    <div>
+    <div className="donations">
+      <p>
+        Developers also need to eat, support us by clicking on the button below!
+      </p>
       <button
         onClick={() =>
           window.open(

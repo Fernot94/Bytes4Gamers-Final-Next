@@ -3,10 +3,14 @@ import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 
-export default function PokerRules() {
+export default function HowToPlay() {
   return (
-    <div className="mainPokerRules">
-      <img className="howToPlayImg" src="/how-to-play.jpg" alt="How to play" />
+    <div className="mainHowToPlay">
+      <img
+        className="howToPlayImg"
+        src="/howtoplay-assets/how-to-play.jpg"
+        alt="How to play"
+      />
       <div className="learn">
         <h2>Learn how to play poker</h2>
         <p>
@@ -36,7 +40,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/royal-flush.png"
+              src="/howtoplay-assets/royal-flush.png"
               alt="Royal Straight Flush"
             />
             <h3>Royal Straight Flush</h3>
@@ -49,7 +53,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/straight-flush.webp"
+              src="/howtoplay-assets/straight-flush.webp"
               alt="Straight Flush"
             />
             <h3>Straight Flush</h3>
@@ -61,7 +65,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/four-of-a-kind.webp"
+              src="/howtoplay-assets/four-of-a-kind.webp"
               alt="Four of a Kind"
             />
             <h3>Four of a Kind</h3>
@@ -74,7 +78,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/full-house.png"
+              src="/howtoplay-assets/full-house.png"
               alt="Full House"
             />
             <h3>Full House</h3>
@@ -87,7 +91,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/flush.webp"
+              src="/howtoplay-assets/flush.webp"
               alt="Flush"
             />
             <h3>Flush</h3>
@@ -99,7 +103,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/Straight.webp"
+              src="/howtoplay-assets/Straight.webp"
               alt="Straight"
             />
             <h3>Straight</h3>
@@ -111,7 +115,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/three-of-a-kind.png"
+              src="/howtoplay-assets/three-of-a-kind.png"
               alt="Three of a Kind"
             />
             <h3>Three of a Kind</h3>
@@ -124,7 +128,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/two-pair.webp"
+              src="/howtoplay-assets/two-pair.webp"
               alt="Two Pair"
             />
             <h3>Two Pair</h3>
@@ -137,7 +141,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/pair.webp"
+              src="/howtoplay-assets/pair.webp"
               alt="Pair"
             />
             <h3>Pair</h3>
@@ -150,7 +154,7 @@ export default function PokerRules() {
           <div>
             <img
               className="handExemple"
-              src="/rules-assets/high-card.png"
+              src="/howtoplay-assets/high-card.png"
               alt="High Card"
             />
             <h3>High Card</h3>
