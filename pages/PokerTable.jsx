@@ -128,14 +128,14 @@ export default function PokerTable() {
         <div className="players">
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
-              <div className="card1" style={{ backgroundImage: player.cards[0] === "" ? "url(/black_joker.png)" : `url(/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
-              <div className="card2" style={{ backgroundImage: player.cards[1] === "" ? "url(/black_joker.png)" : `url(/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
+              <div className="card1" style={{ backgroundImage: player.cards[0] === "" ? "url(/cards-assets/black_joker.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
+              <div className="card2" style={{ backgroundImage: player.cards[1] === "" ? "url(/cards-assets/black_joker.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
             </div>
           ))}
         </div>
         <div className="communityCards">
           {communityCards.map((community, i) => (
-            <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/${community.value}_of_${community.suit}.png` }}>
+            <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
             </div>
           ))}
         </div>
