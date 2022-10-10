@@ -109,15 +109,24 @@ a {
   justify-content: center;
 }
 
+.games{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 70px;
+  column-gap: 20px;
+}
 
-.gamePokerImg {
+.gamePokerImg, .disableGames {
   border-radius: 25px;
   width: 400px;
   cursor: pointer;
 }
+.disableGames{
+  cursor: not-allowed;
+}
 
 
-.gamePokerImg:hover {
+.gamePokerImg:hover, .disableGames:hover{
   opacity: 0.5;
   transition: opacity 0.3s ease-in-out;
 }
