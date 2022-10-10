@@ -347,10 +347,11 @@ a {
   align-items: center;
   justify-content: center;
   gap: 70px;
+  font-size: 20px;
 }
 
 .ruleExemple {
-  width: 10vw;
+  width: 25vw;
 }
 /* ------------END-------------- */
 
