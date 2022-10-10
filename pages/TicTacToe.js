@@ -46,7 +46,7 @@ export function TicTacToe() {
           <p data-testid="gameover">Game Over!</p>
         ) : (
           <p>
-            Jogador Atual:{" "}
+            Current Player:{" "}
             <span data-testid="turn">{jogoDoGalo.jogadorAtual}</span>
           </p>
         )}
