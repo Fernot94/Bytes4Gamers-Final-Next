@@ -11,6 +11,7 @@ import Home from "./Home";
 import AboutUs from "./AboutUs";
 import Rules from "./Rules";
 import SignUp from "./SignUp";
+import Login from "./Login";
 
 export default function Main() {
   const [page, setPage] = useState("Home");
@@ -32,6 +33,7 @@ export default function Main() {
         {page === "AboutUs" && <AboutUs />}
         {page === "Rules" && <Rules />}
         {page === "SignUp" && <SignUp />}
+        {page === "Login" && <Login />}
       </div>
       <div className="bottom">
         <Foot />

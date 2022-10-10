@@ -124,7 +124,7 @@ a {
 
 /* ------------END-------------- */
 
-/* Poker Rules */
+/* Learn How to Play */
 .learn {
   display: flex;
   flex-direction: column;
@@ -139,9 +139,9 @@ a {
   justify-content: center;
 }
 
-.learn, .handRanking{
-  margin-right: 70px;
-  margin-left: 70px;
+.learn, .handRanking, .Rules, .hands{
+  margin-right: 250px;
+  margin-left: 250px;
 }
 
 .hands {
@@ -208,13 +208,37 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+}
+.flop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: absolute;
+  left: 40vw;
+}
+.turn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 51.7vw;
+}
+.river {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 55.6vw;
 }
 
 .communityCard {
   background-repeat: no-repeat;
   background-size: contain;
-  --size: 6vw;
+  --size: 3.6vw;
   width: var(--size);
   height: calc(var(--size) * 726 / 500);
 }
@@ -235,9 +259,9 @@ a {
 }
 
 .table {
-  background-image: url("/poker-table.png");
   display: flex;
   flex-direction: column;
+  background-image: url("/poker-table.png");
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;

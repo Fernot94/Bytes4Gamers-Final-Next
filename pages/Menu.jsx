@@ -33,6 +33,7 @@ export default function Menu(props) {
         </button>
       </div>
       <div className="auth">
+        <button onClick={() => props.pageFunction("Login")}>Login</button>
         <button onClick={() => props.pageFunction("SignUp")}>Register</button>
       </div>
     </div>

@@ -81,7 +81,9 @@ export default function PokerTable() {
   const [jogadores, setJogadores] = useState([]);
   const [vencedoresRodada, setVencedoresRodada] = useState([]);
   const [deck, setDeck] = useState(DECK_DEFAULT);
-  const [communityCards, setCommunityCards] = useState([]);
+  const [flop, setFlop] = useState([]);
+  const [turn, setTurn] = useState([]);
+  const [river, setRiver] = useState([]);
 
   const shuffle = () => {
     let newDeck = DECK_DEFAULT
@@ -101,14 +103,24 @@ export default function PokerTable() {
     setJogadores((prev) => [...prev, { ...PLAYER_DEFAULT, username: `Player ${prev.length + 1}` }]);
   };
 
-  const dealCommunits = () => {
-    for (let i = jogadores.length * 2; i < 2 * jogadores.length + 5; i++) {
-      setCommunityCards(prev => [...prev, deck[i]])
+  const dealFlop = () => {
+    for (let i = jogadores.length * 2; i < 2 * jogadores.length + 3; i++) {
+      setFlop(prev => [...prev, deck[i]])
+    }
+  };
+  const dealTurn = () => {
+    for (let i = 3 + jogadores.length * 2; i < 2 * jogadores.length + 4; i++) {
+      setTurn(prev => [...prev, deck[i]])
+    }
+  };
+  const dealRiver = () => {
+    for (let i = 4 + jogadores.length * 2; i < 2 * jogadores.length + 5; i++) {
+      setRiver(prev => [...prev, deck[i]])
     }
   };
 
   const vencedor = () => {
-    setVencedoresRodada(getWinners(communityCards, jogadores.map(player => player.cards)))
+    setVencedoresRodada(getWinners(flop.concat(turn).concat(river), jogadores.map(player => player.cards)))
   };
 
   const getPlayerUsername = (cards) => {
@@ -117,7 +129,9 @@ export default function PokerTable() {
 
   const resetRound = () => {
     setVencedoresRodada([])
-    setCommunityCards([])
+    setFlop([])
+    setTurn([])
+    setRiver([])
     setJogadores(prev => prev.map(player => ({ ...player, cards: ["", ""] })))
     shuffle()
   }
@@ -134,21 +148,37 @@ export default function PokerTable() {
           ))}
         </div>
         <div className="communityCards">
-          {communityCards.map((community, i) => (
-            <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
-            </div>
-          ))}
+          <div className="flop">
+            {flop.map((community, i) => (
+              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
+              </div>
+            ))}
+          </div>
+          <div className="turn">
+            {turn.map((community, i) => (
+              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
+              </div>
+            ))}
+          </div>
+          <div className="river">
+            {river.map((community, i) => (
+              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div>
         <button onClick={() => adicionaJogador()}>Adiciona Jogador</button>
         <button onClick={() => shuffle()}>Shuffle</button>
         <button onClick={() => deal()}>Deal</button>
-        <button onClick={() => dealCommunits()}>Deal Communits</button>
+        <button onClick={() => dealFlop()}>Deal Flop</button>
+        <button onClick={() => dealTurn()}>Deal Turn</button>
+        <button onClick={() => dealRiver()}>Deal River</button>
         <button onClick={() => vencedor()}>Vencedor</button>
         <button onClick={() => resetRound()}>Reset</button>
       </div>
-      {vencedoresRodada.length !== 0 && <div>Vencerdor(es): {vencedoresRodada.map((vencedor, i) => <p key={i} >{`${getPlayerUsername(vencedor)} ${handToString(communityCards, vencedor)}`}</p>)}</div>}
+      {vencedoresRodada.length !== 0 && <div>Vencerdor(es): {vencedoresRodada.map((vencedor, i) => <p key={i} >{`${getPlayerUsername(vencedor)} ${handToString(flop.concat(turn).concat(river), vencedor)}`}</p>)}</div>}
     </div>
   );
 }

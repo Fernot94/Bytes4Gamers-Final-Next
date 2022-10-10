@@ -38,8 +38,17 @@ export default function SignUp() {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-
         <br />
+        <input
+          type="checkbox"
+        />
+        <label> I accept the terms of Bytes4Gamers.</label>
+        <br/>
+        <input
+          type="checkbox"
+        />
+        <label> I want to receive publicity by email from Bytes4Gamers.</label>
+        <br/>
         <br />
       </form>
       <button onClick={() => setForm()}>Register</button>
