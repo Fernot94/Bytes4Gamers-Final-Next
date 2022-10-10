@@ -45,7 +45,7 @@ export default function Home(props) {
           <img
             src="/games-assets/tic-tac-toe.jpg"
             alt="Tic Tac Toe"
-            className="disableGames"
+            className="gamePokerImg"
             onClick={() => props.pageFunction("TicTacToe")}
           />
           <h3>Tic Tac Toe</h3>
