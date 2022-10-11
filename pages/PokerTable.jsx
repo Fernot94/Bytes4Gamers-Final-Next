@@ -142,8 +142,8 @@ export default function PokerTable() {
         <div className="players">
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
-              <div className="card1" style={{ backgroundImage: player.cards[0] === "" ? "url(/cards-assets/black_joker.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
-              <div className="card2" style={{ backgroundImage: player.cards[1] === "" ? "url(/cards-assets/black_joker.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
+              <div className="card1" style={{ backgroundImage: player.cards[0] === "" ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
+              <div className="card2" style={{ backgroundImage: player.cards[1] === "" ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
             </div>
           ))}
         </div>
