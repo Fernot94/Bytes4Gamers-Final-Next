@@ -7,7 +7,12 @@ import Donations from "./donations";
 export default function PokerMenu() {
   return (
     <div className="aboutUsMain">
+<<<<<<< HEAD
+      <img className="creatorsPic" src="/aboutus-assets/grouppic.png" />
+      
+=======
       <img src="/aboutus-assets/grouppic.png" alt="Creators"/>
+>>>>>>> b936c688842af700a7246b04079135a9e4ead3b7
       <p>Created by:</p>
       <ul>
         <li>Mauro Serrano</li>

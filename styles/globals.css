@@ -25,9 +25,11 @@ a {
   }
 
   body {
-    background-image: url("/red-background.jpg");
+   /*background-image: url("/red-background.jpg"); */
     color: white;
     background: black;
+   
+    
   }
 }
 
@@ -321,6 +323,9 @@ a {
 
 }
 
+.creatorsPic {
+  width: 70vw;
+}
 /* ------------END-------------- */
 
 /* Donations */
