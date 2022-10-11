@@ -8,6 +8,7 @@ export default function PokerMenu(props) {
   return (
     <div className="aboutUsMain">
       <img className="creatorsPic" src="/aboutus-assets/grouppic.png" />
+      
       <p>Created by:</p>
       <ul>
         <li>Mauro Serrano</li>
