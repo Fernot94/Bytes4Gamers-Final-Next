@@ -7,7 +7,7 @@ import {
   verificarVencedor,
 } from "../src/jogo-do-galo";
 
-export function TicTacToe() {
+export default function TicTacToe() {
   const [jogoDoGalo, setJogoDoGalo] = useState(JOGO_INICIAL);
   const vencedor = verificarVencedor(jogoDoGalo);
   const registaJogada = (i, j) => {

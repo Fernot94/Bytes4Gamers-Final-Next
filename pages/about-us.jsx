@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
-import Donations from "./Donations";
+import Donations from "./donations";
 
-export default function PokerMenu(props) {
+export default function PokerMenu() {
   return (
     <div className="aboutUsMain">
       <img src="/aboutus-assets/grouppic.png" alt="Creators"/>

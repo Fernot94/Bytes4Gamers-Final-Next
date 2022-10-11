@@ -2,40 +2,60 @@ import { useState } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
+import Link from 'next/link'
+import {useRouter} from 'next/router'
 
-export default function Menu(props) {
+export default function Menu() {
+  const router = useRouter()
+
   return (
 
     <div className="menu">
       <div className="abas">
-        <button
-          disabled={props.page === "Home"}
-          onClick={() => props.pageFunction("Home")}
-        >
-          Home
-        </button>
-        <button
-          disabled={props.page === "Rules"}
-          onClick={() => props.pageFunction("Rules")}
-        >
-          Rules
-        </button>
-        <button
-          disabled={props.page === "HowToPlay"}
-          onClick={() => props.pageFunction("HowToPlay")}
-        >
-          How To Play
-        </button>
-        <button
-          disabled={props.page === "AboutUs"}
-          onClick={() => props.pageFunction("AboutUs")}
-        >
-          About Us
-        </button>
+        <Link href="/home">
+          <a>
+            <button disabled={router.asPath === "/home"}>
+              Home
+            </button>
+          </a>
+        </Link>
+        <Link href="/rules">
+          <a>
+            <button disabled={router.asPath === "/rules"}>
+              Rules
+            </button>
+          </a>
+        </Link>
+        <Link href="/how-to-play">
+          <a>
+            <button disabled={router.asPath === "/how-to-play"}>
+              How To Play
+            </button>
+          </a>
+        </Link>
+        <Link href="/about-us">
+          <a>
+            <button disabled={router.asPath === "/about-us"}>
+              About Us
+            </button>
+          </a>
+        </Link>
       </div>
       <div className="auth">
-        <button onClick={() => props.pageFunction("Login")}>Login</button>
-        <button onClick={() => props.pageFunction("SignUp")}>Register</button>
+        <Link href="/login">
+          <a>
+            <button disabled={false}>
+              Login
+            </button>
+          </a>
+        </Link>
+        <Link href="/register">
+          <a>
+            <button disabled={false}>
+              Register
+            </button>
+          </a>
+        </Link>
       </div>
     </div>
   );

@@ -25,8 +25,6 @@ async function addUser(user) {
     return result.insertedId
 }
 
-
-
 export {
     getUserByUsername,
     getUserByEmail,

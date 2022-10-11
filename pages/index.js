@@ -2,37 +2,24 @@ import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import PokerTable from "./PokerTable";
-import PokerMenu from "./PokerMenu";
-import HowToPlay from "./HowToPlay";
-import Menu from "./Menu";
-import Foot from "./Foot";
-import Home from "./Home";
-import AboutUs from "./AboutUs";
-import Rules from "./Rules";
-import SignUp from "./SignUp";
-import Login from "./Login";
-import { TicTacToe } from "./TicTacToe";
+import PokerTable from "./poker-table";
+import PokerMenu from "./poker-menu";
+import HowToPlay from "./how-to-play";
+import Menu from "./menu";
+import Foot from "./foot";
+import Home from "./home";
+import AboutUs from "./about-us";
+import Rules from "./rules";
+import SignUp from "./register";
+import Login from "./login";
+import { TicTacToe } from "./tic-tac-toe";
 
 export default function Main() {
-  const [page, setPage] = useState("Home");
-
-  function changePage(pageName) {
-    setPage(pageName);
-  }
 
   return (
     <div>
       <div className="middle">
-        {page === "Home" && <Home pageFunction={changePage} />}
-        {page === "PokerMenu" && <PokerMenu pageFunction={changePage} />}
-        {page === "PokerTable" && <PokerTable />}
-        {page === "HowToPlay" && <HowToPlay />}
-        {page === "AboutUs" && <AboutUs />}
-        {page === "Rules" && <Rules />}
-        {page === "SignUp" && <SignUp />}
-        {page === "Login" && <Login />}
-        {page === "TicTacToe" && <TicTacToe />}
+        <Home />
       </div>
     </div>
   );

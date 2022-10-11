@@ -2,20 +2,24 @@ import { useState } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
+import Link from 'next/link'
 
-export default function Home(props) {
+export default function Home() {
   return (
     <div className="mainHome">
       <h2>Games</h2>
       <div className="games">
         <div className="poker">
-          <img
-            src="/games-assets/poker.jpg"
-            alt="Poker Game"
-            className="gamePokerImg"
-            onClick={() => props.pageFunction("PokerMenu")}
-          />
-          <h3>Poker  Texas Hold'em</h3>
+          <Link href="/poker-menu">
+            <a>
+              <img
+                src="/games-assets/poker.jpg"
+                alt="Poker Game"
+                className="gamePokerImg"
+              />
+              <h3>Poker Texas Hold'em</h3>
+            </a>
+          </Link>
         </div>
         <div className="roulette">
           <img
@@ -42,13 +46,16 @@ export default function Home(props) {
           <h3>Blackjack</h3>
         </div>
         <div className="ticTacToe">
-          <img
-            src="/games-assets/tic-tac-toe.jpg"
-            alt="Tic Tac Toe"
-            className="gamePokerImg"
-            onClick={() => props.pageFunction("TicTacToe")}
-          />
-          <h3>Tic Tac Toe</h3>
+          <Link href="/tic-tac-toe">
+            <a>
+              <img
+                src="/games-assets/tic-tac-toe.jpg"
+                alt="Tic Tac Toe"
+                className="gamePokerImg"
+              />
+              <h3>Tic Tac Toe</h3>
+            </a>
+          </Link>
         </div>
         <div className="chess">
           <img
