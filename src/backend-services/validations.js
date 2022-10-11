@@ -1,4 +1,4 @@
-const { checkIfEmailExists } = require("./common")
+const { checkIfEmailExists, checkIfUserExists } = require("./common")
 const { checkPasswordStrength, validateEmail } = require("./common")
 
 async function validateFields({
@@ -34,10 +34,7 @@ async function getUserErrors(username) {
     if (checkRequiredValueMissing(username)) {
         return "Por favor introduza o seu endereço de username."
     }
-    if (!validateUsername(username)) {
-        return "Por favor introduza um endereço de username válido."
-    }
-    if (await checkIfUsernameExists(username)) {
+    if (await checkIfUserExists(username)) {
         return "O username introduzido já está registado."
     }
 }

@@ -1,3 +1,5 @@
+import { getUserByEmail, getUserByUsername } from "../backend-data/users";
+
 function generateToken(email) {
     return email
         .split('')
@@ -30,7 +32,7 @@ const user = await getUserByEmail(email)
 return user !== null
 }
 async function checkIfUserExists(username) {
-const user = await getUserByUsernamel(username)
+const user = await getUserByUsername(username)
 return user !== null
 }
 export {

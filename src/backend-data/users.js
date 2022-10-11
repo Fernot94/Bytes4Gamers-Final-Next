@@ -1,8 +1,13 @@
-const { getMongoCollection } = require("./db")
+const { getMongoCollection } = require("./mongodb")
 
-const DATABASE = "challenge13"
+const DATABASE = "mongo-bytes4gamers"
 const USER_COLLECTION = 'users'
 
+async function getUserByUsername(username) {
+    const collection = await getMongoCollection(DATABASE, USER_COLLECTION)
+    const result = await collection.findOne({ username })
+    return result
+}
 async function getUserByEmail(email) {
     const collection = await getMongoCollection(DATABASE, USER_COLLECTION)
     const result = await collection.findOne({ email })
@@ -22,7 +27,8 @@ async function addUser(user) {
 
 
 
-module.exports = {
+export {
+    getUserByUsername,
     getUserByEmail,
     addUser,
     getUserById
