@@ -33,7 +33,7 @@ export default function HowToPlay() {
         <p>
           Before you hit the online poker tables, you’ll need to familiarise
           yourself with the basic hand rankings and rules that govern Texas
-          Hold’em. Here are the 10 hands every player should know before joining
+          Hold’em. <br/>Here are the 10 hands every player should know before joining
           the action.
         </p>
         <div className="hands">
