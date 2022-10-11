@@ -15,7 +15,7 @@ export default function Home(props) {
             className="gamePokerImg"
             onClick={() => props.pageFunction("PokerMenu")}
           />
-          <h3>Poker Texas Hold'em</h3>
+          <h3>Poker  Texas Hold'em</h3>
         </div>
         <div className="roulette">
           <img
