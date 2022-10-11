@@ -1,7 +1,8 @@
-const { checkIfEmailExists } = require("./users")
+const { checkIfEmailExists } = require("./common")
 const { checkPasswordStrength, validateEmail } = require("./common")
 
 async function validateFields({
+    username,
     email,
     password,
     passwordConfirmation,
@@ -9,6 +10,7 @@ async function validateFields({
     acceptsCommunications
 }) {
     const errors = cleanUndefinedProperties({
+        username: await getUserErrors(username),
         email: await getEmailErrors(email),
         password: getPasswordErrors(password),
         passwordConfirmation: getPasswordConfirmationErrors(passwordConfirmation, password),
@@ -26,6 +28,18 @@ async function validateFields({
 
 function checkRequiredValueMissing(value) {
     return value === undefined || value.length === 0
+}
+
+async function getUserErrors(username) {
+    if (checkRequiredValueMissing(username)) {
+        return "Por favor introduza o seu endereço de username."
+    }
+    if (!validateUsername(username)) {
+        return "Por favor introduza um endereço de username válido."
+    }
+    if (await checkIfUsernameExists(username)) {
+        return "O username introduzido já está registado."
+    }
 }
 
 async function getEmailErrors(email) {
@@ -76,6 +90,6 @@ function cleanUndefinedProperties(obj) {
             {})
 }
 
-module.exports = {
+export {
     validateFields
 }

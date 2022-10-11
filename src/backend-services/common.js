@@ -25,8 +25,18 @@ function checkPasswordStrength(password) {
         .reduce((score, t) => t ? score + 1 : score, 0)
 }
 
-module.exports = {
+async function checkIfEmailExists(email) {
+const user = await getUserByEmail(email)
+return user !== null
+}
+async function checkIfUserExists(username) {
+const user = await getUserByUsernamel(username)
+return user !== null
+}
+export {
     generateToken,
     validateEmail,
-    checkPasswordStrength
+    checkPasswordStrength,
+    checkIfEmailExists,
+    checkIfUserExists
 }
