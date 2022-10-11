@@ -180,7 +180,7 @@ export default function Rules() {
           </p>
           <p>
             The <b>pre-flop</b> betting round begins as soon as all players have
-            received their hole cards, before any community cards have been
+            received their hole cards, before any community cards have been<br/>
             dealt; betting on <b>the flop</b> occurs after the first three
             community cards are dealt; on <b>the turn</b> after the fourth
             community card; and on
@@ -188,7 +188,7 @@ export default function Rules() {
           </p>
           <p>
             On each betting round, betting continues until every player has
-            either matched the bets made or folded (if no bets are made, the
+            either matched the bets made or folded<br/> (if no bets are made, the
             round is complete when every player has checked). When the betting
             round is completed, the next dealing/betting round begins, or the
             hand is complete.
@@ -196,7 +196,7 @@ export default function Rules() {
           <p>
             Here’s an example of a Texas Hold’em hand after all the cards have
             been dealt. As you can see, players may use any of their two hole
-            cards with any of the five community cards to make the best
+            cards with any of the five community cards to make the best<br/>
             five-card hand they can make - in this case, you can use both your
             hole cards and three of the shared community cards to make a
             straight.
