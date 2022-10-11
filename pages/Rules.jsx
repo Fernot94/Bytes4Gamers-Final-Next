@@ -39,7 +39,7 @@ export default function Rules() {
         <p>
           Before you hit the online poker tables, you’ll need to familiarise
           yourself with the basic hand rankings and rules that govern Texas
-          Hold’em. Here are the 10 hands every player should know before joining
+          Hold’em.<br/> Here are the 10 hands every player should know before joining
           the action.
         </p>
         <div className="hands">
@@ -128,9 +128,9 @@ export default function Rules() {
           <h3>Getting Started</h3>
           <p>
             Poker games typically feature a forced bet, such as the Big Blind
-            and Small Blind in Hold’em and Omaha. These forced bets comprise the
+            and Small Blind in Hold’em and Omaha.<br/> These forced bets comprise the
             starting pot in any given hand of poker, which is the first
-            incentive players have to win the hand. Action arising from the
+            incentive players have to win the hand.<br/> Action arising from the
             subsequent rounds of betting further increases the size of the pot.
           </p>
         </div>
@@ -138,7 +138,7 @@ export default function Rules() {
           <h3>Dealing Cards and Betting Rounds</h3>
           <p>
             After any initial cards are dealt, players are usually called upon
-            to act in turn, moving clockwise around the table. Each player can
+            to act in turn, moving clockwise around the table.<br/> Each player can
             usually take one of the following actions when it is their turn to
             act:
           </p>
@@ -147,7 +147,7 @@ export default function Rules() {
               <b>Check</b> – To check is to decline the opportunity to open the
               betting. Players can only check when there is no bet during the
               current round, and the act of checking passes the action clockwise
-              to the next person in the hand. If all active players check, those
+              to the next person in the hand. <br/>If all active players check, those
               players remain in the hand and the round is considered complete.
             </li>
             <li>
@@ -167,13 +167,13 @@ export default function Rules() {
             <li>
               <b>Raise</b> – Players may raise if other players have bet during
               the current round; this requires the raising player to match the
-              highest bet made, and then make a greater one. All subsequent
+              highest bet made, and then make a greater one. <br/>All subsequent
               players are required to call the raise or raise again (‘re-raise’)
               to stay in the hand.
             </li>
           </ul>
           <p>
-            Different variants of poker have different betting rounds. Texas
+            Different variants of poker have different betting rounds.<br/> Texas
             Hold’em and Omaha are the two most popular poker games in the world
             and have identical betting structures, with four rounds of betting
             known as pre-flop, the flop, the turn and the river.
@@ -217,13 +217,13 @@ export default function Rules() {
           <p>
             Once the last bet or raise has been called during the final round of
             betting, a showdown occurs; the remaining active players must show
-            or ‘declare’ their hands, and the player(s) with the best ranking
+            or ‘declare’ their hands, and the player(s) with the best <br/>ranking
             hand(s) win the pot.
           </p>
           <p>
             Players often show their hands in order, rather than all at the same
             time. Multiple players can share a single pot, with the pot divided
-            in different ways depending on the game rules and how each player’s
+            in different ways depending on the game rules and how each<br/> player’s
             hand ranks against their opponents.
           </p>
         </div>
@@ -266,21 +266,21 @@ export default function Rules() {
           <p>
             You may have seen a poker scene in a movie or on TV where a player
             is faced with a bet for more chips than they have at the table, and
-            is forced to wager a watch, a car or some other possession in order
+            is forced to wager a watch, a car or some other possession<br/> in order
             to stay in the hand. This may make for good drama, but it is not
             generally the way poker is played in real life!
           </p>
           <p>
             All games on our site are played ‘table stakes’, meaning only the
             chips in play at the beginning of each hand can be used during the
-            hand. The table stakes rule has an application called the ‘All-In’
+            hand.<br/> The table stakes rule has an application called the ‘All-In’
             rule, which states that a player cannot be forced to forfeit a poker
             hand because the player does not have enough chips to call a bet.
           </p>
           <p>
             A player who does not have enough chips to call a bet is declared
             All-In. The player is eligible for the portion of the pot up to the
-            point of his final wager. All further action involving other players
+            point of his final wager. All<br/> further action involving other players
             takes place in a ‘side pot’, which the All-In player is not eligible
             to win. If more than one player goes All-In during a hand, there
             could be more than one side pot.

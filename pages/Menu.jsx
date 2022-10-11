@@ -5,6 +5,7 @@ import { handToString } from "../src/rules";
 
 export default function Menu(props) {
   return (
+
     <div className="menu">
       <div className="abas">
         <button
