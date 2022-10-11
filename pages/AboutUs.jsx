@@ -7,7 +7,7 @@ import Donations from "./Donations";
 export default function PokerMenu(props) {
   return (
     <div className="aboutUsMain">
-      <img className="CreatorsPic" src="/aboutus-assets/grouppic.png" alt="Creators"/>
+      <img src="/aboutus-assets/grouppic.png" alt="Creators"/>
       <p>Created by:</p>
       <ul>
         <li>Mauro Serrano</li>

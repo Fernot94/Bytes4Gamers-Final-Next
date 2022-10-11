@@ -15,7 +15,7 @@ export default function SignUp() {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({username: username, email: email,password: userpassword,passwordConfirmation: passwordConfirmation,acceptsTerms: terms,acceptsCommunications: communication})
+      body: JSON.stringify({username: username, email: email,password: userpassword,passwordConfirmation: passwordConfirmation,acceptsTerms: terms,acceptsCommunications: communication, chips: 999999999})
     };
 
     fetch('http://localhost:3000/api/signup', options)

@@ -23,9 +23,6 @@ export default function Main() {
 
   return (
     <div>
-      <div className="top">
-        <Menu pageFunction={changePage} page={page} />
-      </div>
       <div className="middle">
         {page === "Home" && <Home pageFunction={changePage} />}
         {page === "PokerMenu" && <PokerMenu pageFunction={changePage} />}
@@ -36,9 +33,6 @@ export default function Main() {
         {page === "SignUp" && <SignUp />}
         {page === "Login" && <Login />}
         {page === "TicTacToe" && <TicTacToe />}
-      </div>
-      <div className="bottom">
-        <Foot />
       </div>
     </div>
   );

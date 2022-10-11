@@ -7,6 +7,17 @@ export default function SignUp() {
 
   const setForm = () => {
     
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usernameOrEmail: usernameOrEmail, password: userpassword })
+    };
+
+    fetch('http://localhost:3000/api/login', options)
+      .then(response => response.json())
+      .then(response => localStorage.setItem("token", response.token))
+      .catch(err => console.error(err));
+
     setUserPassword("");
   };
 
