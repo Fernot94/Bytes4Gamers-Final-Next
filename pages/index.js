@@ -12,6 +12,7 @@ import AboutUs from "./AboutUs";
 import Rules from "./Rules";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import { TicTacToe } from "./TicTacToe";
 
 export default function Main() {
   const [page, setPage] = useState("Home");
@@ -34,6 +35,7 @@ export default function Main() {
         {page === "Rules" && <Rules />}
         {page === "SignUp" && <SignUp />}
         {page === "Login" && <Login />}
+        {page === "TicTacToe" && <TicTacToe />}
       </div>
       <div className="bottom">
         <Foot />

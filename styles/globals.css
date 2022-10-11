@@ -25,6 +25,7 @@ a {
   }
 
   body {
+    background-image: url("/red-background.jpeg");
     color: white;
     background: black;
   }
@@ -43,6 +44,7 @@ a {
   width: 100%;
   height: 80px;
   margin-bottom: 70px;
+  
 }
 
 .abas{
@@ -65,13 +67,13 @@ a {
 .abas button:hover{
   width: 100px;
   height: 30px;
-  background-color: lightgreen;
+  background-color: darkred;
 }
 
 .abas button:disabled{
   width: 100px;
   height: 30px;
-  background-color: green;
+  background-color: darkred;
   color: white;
 }
 
@@ -94,7 +96,7 @@ a {
 .auth button:hover{
   width: 100px;
   height: 30px;
-  background-color: lightgreen;
+  background-color: darkred;
 }
 
 
@@ -107,6 +109,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 }
 
 .games{
@@ -139,6 +142,9 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
+  
+  
 }
 
 .handRanking {
@@ -146,11 +152,17 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
+  
+  
 }
 
 .learn, .handRanking, .Rules, .hands{
   margin-right: 250px;
   margin-left: 250px;
+  
+  
+  
 }
 
 .hands {
@@ -158,6 +170,7 @@ a {
   grid-template-columns: repeat(3, 1fr);
   row-gap: 70px;
   column-gap: 20px;
+  font-size: 19px;
 }
 
 .handExemple {
@@ -334,10 +347,11 @@ a {
   align-items: center;
   justify-content: center;
   gap: 70px;
+  font-size: 20px;
 }
 
 .ruleExemple {
-  width: 10vw;
+  width: 25vw;
 }
 /* ------------END-------------- */
 
