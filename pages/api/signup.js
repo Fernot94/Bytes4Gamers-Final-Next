@@ -3,7 +3,6 @@ import { validateFields } from "../../src/backend-services/validations";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-
     const validation = await validateFields(req.body);
 
     if (validation.success) {

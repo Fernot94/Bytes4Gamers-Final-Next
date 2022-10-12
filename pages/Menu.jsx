@@ -6,14 +6,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { isLogged } from "./Login";
 import { useEffect } from "react";
+import react from "react";
 
 export default function Menu() {
+  function refreshPage() {
+    window.location.reload();
+  }
   const [userToken, setUserToken] = useState();
-  const [user, setUser] = useState({ username: "vazio" });
+  const [user, setUser] = useState({ username: "" });
   const router = useRouter();
 
   const getUserAll = () => {
-    if (userToken === undefined) {
+    if (userToken === null || userToken === undefined) {
       return;
     }
     const options = { method: "GET", headers: { token: userToken } };

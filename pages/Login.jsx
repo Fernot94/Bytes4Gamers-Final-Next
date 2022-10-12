@@ -1,8 +1,10 @@
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 export default function SignUp() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [userpassword, setUserPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const router = useRouter();
 
   const setForm = () => {
     const options = {
@@ -14,12 +16,20 @@ export default function SignUp() {
       }),
     };
 
-    fetch("http://localhost:3000/api/login", options)
+    fetch("/api/login", options)
       .then((response) => response.json())
-      .then((response) => localStorage.setItem("token", response.token))
+      .then((response) => handleLogin(response))
       .catch((err) => console.error(err));
 
     setUserPassword("");
+  };
+
+  const handleLogin = (response) => {
+    if (response.message === undefined) {
+      localStorage.setItem("token", response.token);
+      return router.push("/home");
+    }
+    return setLoginError(response.message);
   };
 
   return (
@@ -43,6 +53,7 @@ export default function SignUp() {
       </form>
       <br />
       <button onClick={() => setForm()}>Login</button>
+      {loginError !== "" && <p>{loginError}</p>}
     </div>
   );
 }
