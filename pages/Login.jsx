@@ -46,3 +46,7 @@ export default function SignUp() {
     </div>
   );
 }
+
+// export const isLogged = () => {
+//   localStorage.length >= 1;
+// };

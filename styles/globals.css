@@ -58,6 +58,15 @@ a {
   gap: 10px;
   
 }
+.isLoggedIn{
+  position: absolute;
+  top: 28px;
+  right: 50px;
+  display: flex;
+  gap: 10px;
+  
+}
+
 
 .abas button{
   width: 100px;
