@@ -16,6 +16,12 @@ export default function Menu() {
   const [user, setUser] = useState({ username: "" });
   const router = useRouter();
 
+  const handleLogout = () => {
+    refreshPage();
+    localStorage.clear();
+    router.push("/home");
+  };
+
   const getUserAll = () => {
     if (userToken === null || userToken === undefined) {
       return;
@@ -84,9 +90,9 @@ export default function Menu() {
         <div className="isLoggedIn">
           <button disabled>Chips: {user.chips}</button>
           <button disabled>{user.username}</button>
-          <Link href="/logout">
+          <Link href="/home">
             <a>
-              <button>Logout</button>
+              <button onClick={() => handleLogout()}>Logout</button>
             </a>
           </Link>
         </div>
