@@ -110,6 +110,26 @@ a {
   height: 30px;
   background-color: darkred;
 }
+.isLoggedIn button{
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 5px;
+}
+
+.isLoggedIn button:hover{
+  width: 100px;
+  height: 30px;
+  background-color: darkred;
+}
+.isLoggedIn button:disabled{
+  width: 100px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
 
 
 /* ------------END-------------- */
