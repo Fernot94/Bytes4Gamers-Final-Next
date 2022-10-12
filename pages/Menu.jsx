@@ -35,6 +35,12 @@ export default function Menu() {
     getUserAll();
   }, [userToken]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setUserToken(localStorage.getItem("token"));
+    }, 10);
+  }, [router.asPath]);
+
   return (
     <div className="menu">
       <div className="abas">
