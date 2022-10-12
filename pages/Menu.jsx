@@ -4,10 +4,48 @@ import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { isLogged } from "./Login";
+import { useEffect } from "react";
+import react from "react";
 
-export default function Menu(props) {
-  const [usernameOrEmail, setUsernameOrEmail] = useState(props.user);
+export default function Menu() {
+  function refreshPage() {
+    window.location.reload();
+  }
+  const [userToken, setUserToken] = useState();
+  const [user, setUser] = useState({ username: "" });
   const router = useRouter();
+
+  const handleLogout = () => {
+    refreshPage();
+    localStorage.clear();
+    router.push("/home");
+  };
+
+  const getUserAll = () => {
+    if (userToken === null || userToken === undefined) {
+      return;
+    }
+    const options = { method: "GET", headers: { token: userToken } };
+    fetch("/api/login", options)
+      .then((response) => response.json())
+      .then((response) => setUser(response.user))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    setUserToken(localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    getUserAll();
+  }, [userToken]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUserToken(localStorage.getItem("token"));
+    }, 10);
+  }, [router.asPath]);
 
   return (
     <div className="menu">
@@ -35,21 +73,29 @@ export default function Menu(props) {
           </a>
         </Link>
       </div>
-      {usernameOrEmail === undefined ? (
+      {!userToken ? (
         <div className="auth">
           <Link href="/login">
             <a>
-              <button disabled={false}>Login</button>
+              <button disabled={router.asPath === "/login"}>Login</button>
             </a>
           </Link>
           <Link href="/register">
             <a>
-              <button disabled={false}>Register</button>
+              <button disabled={router.asPath === "/register"}>Register</button>
             </a>
           </Link>
         </div>
       ) : (
-        <div>ola</div>
+        <div className="isLoggedIn">
+          <button disabled>Chips: {user.chips}</button>
+          <button disabled>{user.username}</button>
+          <Link href="/home">
+            <a>
+              <button onClick={() => handleLogout()}>Logout</button>
+            </a>
+          </Link>
+        </div>
       )}
     </div>
   );

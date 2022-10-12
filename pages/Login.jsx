@@ -1,8 +1,10 @@
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 export default function SignUp() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [userpassword, setUserPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const router = useRouter();
 
   const setForm = () => {
     const options = {
@@ -14,16 +16,25 @@ export default function SignUp() {
       }),
     };
 
-    fetch("http://localhost:3000/api/login", options)
+    fetch("/api/login", options)
       .then((response) => response.json())
-      .then((response) => localStorage.setItem("token", response.token))
+      .then((response) => handleLogin(response))
       .catch((err) => console.error(err));
 
     setUserPassword("");
   };
 
+  const handleLogin = (response) => {
+    if (response.message === undefined) {
+      localStorage.setItem("token", response.token);
+      return router.push("/home");
+    }
+    return setLoginError(response.message);
+  };
+
   return (
     <div className="signupMain">
+<<<<<<< HEAD
       <div className="box">
         <form autoComplete="off">
           <h2>Login</h2>
@@ -55,3 +66,32 @@ export default function SignUp() {
     </div>
   );
 }
+=======
+      <h2>Login</h2>
+      <form>
+        <input
+          placeholder="Username / Email"
+          type="text"
+          value={usernameOrEmail}
+          onChange={(e) => setUsernameOrEmail(e.target.value)}
+        />
+        <br />
+        <input
+          placeholder="Password"
+          type="password"
+          value={userpassword}
+          onChange={(e) => setUserPassword(e.target.value)}
+        />
+        <br />
+      </form>
+      <br />
+      <button onClick={() => setForm()}>Login</button>
+      {loginError !== "" && <p>{loginError}</p>}
+    </div>
+  );
+}
+
+// export const isLogged = () => {
+//   localStorage.length >= 1;
+// };
+>>>>>>> 2dcf41fff75af7f96125bb7704c45eab18fd9c33
