@@ -15,7 +15,7 @@ export default function SignUp() {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({username: username, email: email,password: userpassword,passwordConfirmation: passwordConfirmation,acceptsTerms: terms,acceptsCommunications: communication, chips: 999999999})
+      body: JSON.stringify({ username: username, email: email, password: userpassword, passwordConfirmation: passwordConfirmation, acceptsTerms: terms, acceptsCommunications: communication, chips: 999999999 })
     };
 
     fetch('http://localhost:3000/api/signup', options)
@@ -29,51 +29,61 @@ export default function SignUp() {
 
   return (
     <div className="signupMain">
-      <h2>Create an Account</h2>
-      <form>
-        <input
-          placeholder="Username"
-          type="text"
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <br />
-        <input
-          placeholder="Email"
-          type="text"
-          value={email}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
-        <br />
-        <input
-          placeholder="Password"
-          type="password"
-          value={userpassword}
-          onChange={(e) => setUserPassword(e.target.value)}
-        />
-        <br />
-        <input
-          placeholder="Confirm Password"
-          type="password"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />
-        <br />
-        <input
-          type="checkbox"
-          onChange={(e) => setTerms(e.target.checked)}
-        />
-        <label> I accept the terms of Bytes4Gamers.</label>
-        <br />
-        <input
-          type="checkbox"
-          onChange={(e) => setCommunication(e.target.checked)}
-        />
-        <label> I want to receive publicity by email from Bytes4Gamers.</label>
-        <br />
-        <br />
-      </form>
-      <button onClick={() => setForm()}>Register</button>
+      <div className="box registerBox">
+        <form>
+          <h2>Create an Account</h2>
+          <div className="inputBox">
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            <span>Username</span>
+            <i></i>
+          </div>
+          <div className="inputBox">
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <span>Email</span>
+            <i></i>
+          </div>
+          <div className="inputBox">
+            <input
+              type="password"
+              value={userpassword}
+              onChange={(e) => setUserPassword(e.target.value)}
+            />
+            <span>Password</span>
+            <i></i>
+          </div>
+          <div className="inputBox">
+            <input
+              type="password"
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+            />
+            <span>Confirm Password</span>
+            <i></i>
+          </div>
+          <div className="inputBox">
+            <input
+              type="checkbox"
+              onChange={(e) => setTerms(e.target.checked)}
+            />
+
+          </div>
+          <label> I accept the terms of Bytes4Gamers.</label>
+          <input
+            type="checkbox"
+            onChange={(e) => setCommunication(e.target.checked)}
+          />
+          <label> I want to receive publicity by email from Bytes4Gamers.</label>
+          <input className="inputLogin" value={"Register"} type={"submit"} onClick={() => setForm()}></input>
+        </form>
+      </div>
     </div>
   );
 }
