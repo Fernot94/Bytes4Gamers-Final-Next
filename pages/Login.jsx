@@ -34,7 +34,6 @@ export default function SignUp() {
 
   return (
     <div className="signupMain">
-<<<<<<< HEAD
       <div className="box">
         <form autoComplete="off">
           <h2>Login</h2>
@@ -66,32 +65,3 @@ export default function SignUp() {
     </div>
   );
 }
-=======
-      <h2>Login</h2>
-      <form>
-        <input
-          placeholder="Username / Email"
-          type="text"
-          value={usernameOrEmail}
-          onChange={(e) => setUsernameOrEmail(e.target.value)}
-        />
-        <br />
-        <input
-          placeholder="Password"
-          type="password"
-          value={userpassword}
-          onChange={(e) => setUserPassword(e.target.value)}
-        />
-        <br />
-      </form>
-      <br />
-      <button onClick={() => setForm()}>Login</button>
-      {loginError !== "" && <p>{loginError}</p>}
-    </div>
-  );
-}
-
-// export const isLogged = () => {
-//   localStorage.length >= 1;
-// };
->>>>>>> 2dcf41fff75af7f96125bb7704c45eab18fd9c33
