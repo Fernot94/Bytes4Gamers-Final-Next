@@ -1,22 +1,23 @@
 import { useState } from "react";
 
 export default function SignUp() {
-
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [userpassword, setUserPassword] = useState("");
 
   const setForm = () => {
-    
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ usernameOrEmail: usernameOrEmail, password: userpassword })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        usernameOrEmail: usernameOrEmail,
+        password: userpassword,
+      }),
     };
 
-    fetch('http://localhost:3000/api/login', options)
-      .then(response => response.json())
-      .then(response => localStorage.setItem("token", response.token))
-      .catch(err => console.error(err));
+    fetch("http://localhost:3000/api/login", options)
+      .then((response) => response.json())
+      .then((response) => localStorage.setItem("token", response.token))
+      .catch((err) => console.error(err));
 
     setUserPassword("");
   };
