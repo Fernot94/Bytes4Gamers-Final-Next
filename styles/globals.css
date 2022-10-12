@@ -186,6 +186,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 70px;
+  overflow: hidden;
 }
 
 .howToPlayImg {
@@ -358,6 +359,7 @@ a {
   gap: 70px;
   font-size: 20px;
   text-align: justify;
+  overflow: hidden;
 }
 
 .ruleExemple {
