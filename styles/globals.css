@@ -17,6 +17,7 @@ a {
 
 * {
   box-sizing: border-box;
+  /* border: 1px solid red; */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -161,9 +162,8 @@ a {
 }
 
 .learn, .handRanking, .Rules, .hands{
-  margin-right: 250px;
-  margin-left: 250px;
-  
+  margin-right: 25px;
+  margin-left: 25px;
   
   
 }
