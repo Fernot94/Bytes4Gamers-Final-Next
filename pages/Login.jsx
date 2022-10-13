@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { refreshPage } from "./menu";
+import Link from "next/link";
+
 export default function SignUp() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [userpassword, setUserPassword] = useState("");
@@ -61,7 +63,9 @@ export default function SignUp() {
           </div>
           <div className="links">
             <a href="#">Forgot Password ?</a>
+            <Link href="/register">
             <a href="#">Signup</a>
+          </Link>
           </div>
           <input
             className="inputLogin"

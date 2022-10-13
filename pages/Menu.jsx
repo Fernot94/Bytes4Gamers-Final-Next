@@ -4,7 +4,7 @@ import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { isLogged } from "./Login";
+import { isLogged } from "./login";
 import { useEffect } from "react";
 import react from "react";
 
@@ -30,10 +30,10 @@ export default function Menu() {
 
     localStorage.clear();
     router.push("/home");
-    useEffect(() => {
-      refreshPage()
-    }, [router])
   };
+  useEffect(() => {
+    refreshPage()
+  }, [router]) 
 
   const getUserAll = () => {
     if (userToken === null || userToken === undefined) {
