@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
+import Link from "next/link";
 
 const DECK_DEFAULT = [
   { value: 1, suit: "hearts" },
@@ -90,6 +91,7 @@ export default function PokerTable() {
   const [turn, setTurn] = useState([]);
   const [river, setRiver] = useState([]);
   const [seated, setSeated] = useState(false);
+  const [joinChips, setJoinChips] = useState(0);
 
   const getUserLogado = () => {
     const userToken = localStorage.getItem("token");
@@ -105,7 +107,6 @@ export default function PokerTable() {
 
   function addPlayer(player) {
     console.log(tableInfos);
-    // console.log(player);
     if (
       !tableInfos.players
         .map((p) => p.user.username)
@@ -204,9 +205,19 @@ export default function PokerTable() {
     addPlayer({
       user: userLogado,
       cards: ["", ""],
-      tableChips: 500,
+      tableChips: joinChips,
       inRound: false,
     });
+  };
+
+  const sitOut = () => {
+    setTableInfos((prev) => ({
+      ...prev,
+      players: prev.players.filter(
+        (player) => player.user.username !== userLogado.username
+      ),
+    }));
+    setSeated(false);
   };
 
   const dealFlop = () => {
@@ -214,6 +225,18 @@ export default function PokerTable() {
       setTableInfos((prev) => ({ ...prev, flop: [...prev.flop, deck[i]] }));
     }
   };
+
+  const fold = () => {
+    setTableInfos((prev) => ({
+      ...prev,
+      players: prev.players.map((player) =>
+        player.user.username === userLogado.username
+          ? { ...player, cards: ["", ""], inRound: false }
+          : player
+      ),
+    }));
+  };
+
   const dealTurn = () => {
     for (let i = 3 + jogadores.length * 2; i < 2 * jogadores.length + 4; i++) {
       setTableInfos((prev) => ({ ...prev, turn: [...prev.turn, deck[i]] }));
@@ -227,7 +250,7 @@ export default function PokerTable() {
 
   const testalog = () => {
     console.log(tableInfos);
-    console.log(vencedoresRodada);
+    // console.log(vencedoresRodada);
   };
 
   const vencedor = () => {
@@ -235,7 +258,9 @@ export default function PokerTable() {
       ...prev,
       roundWinners: getWinners(
         flop.concat(turn).concat(river),
-        jogadores.map((player) => player.cards)
+        jogadores
+          .filter((player) => player.inRound)
+          .map((player) => player.cards)
       ),
     }));
   };
@@ -336,30 +361,51 @@ export default function PokerTable() {
         </div>
       </div>
       <div>
-        <button onClick={() => testalog()}>Teste</button>
-        {!seated && <button onClick={() => handleJoin()}>Join</button>}
-        <button onClick={() => deal()}>Deal</button>
-        <button onClick={() => dealFlop()}>Deal Flop</button>
-        <button onClick={() => dealTurn()}>Deal Turn</button>
-        <button onClick={() => dealRiver()}>Deal River</button>
-        <button onClick={() => vencedor()}>Vencedor</button>
-        <button onClick={() => resetRound()}>Reset</button>
-
-        {/* {!seated && (
-          // <input
-          //   type={"range"}
-          //   id={"chips"}
-          //   onChange={() =>
-          //     setTableInfos((prev) => ({
-          //       ...prev,
-          //       bigBlind: document.getElementById("points").value,
-          //     }))
-          //   }
-          //   name={"points"}
-          //   min={tableInfos.bigBlind * 10}
-          //   max={tableInfos.bigBlind * 100}
-          // />
-        )} */}
+        <Link href={"/poker-menu"}>
+          <a>
+            <button>Go back</button>
+          </a>
+        </Link>
+        {seated && (
+          <div>
+            <button onClick={() => testalog()}>Teste</button>
+            <button onClick={() => deal()}>Deal</button>
+            <button onClick={() => dealFlop()}>Deal Flop</button>
+            <button onClick={() => dealTurn()}>Deal Turn</button>
+            <button onClick={() => dealRiver()}>Deal River</button>
+            <button onClick={() => vencedor()}>Vencedor</button>
+            <button onClick={() => resetRound()}>Reset</button>
+            <button onClick={() => fold()}>Fold</button>
+            <button onClick={() => sitOut()}>Leave Table</button>
+          </div>
+        )}
+        {/* && tableInfos?.maxPlayers < tableInfos?.players.length */}
+        {!seated && (
+          <div>
+            <button onClick={() => handleJoin()}>Join</button>
+            <div className="joinChips">
+              <h4>{joinChips}</h4>
+              <input
+                type={"range"}
+                id={"chips"}
+                onChange={() =>
+                  setJoinChips(document.getElementById("chips").value)
+                }
+                name={"chips"}
+                min={
+                  tableInfos?.bigBlind === undefined
+                    ? 0
+                    : tableInfos.bigBlind * 10
+                }
+                max={
+                  tableInfos?.bigBlind === undefined
+                    ? 1
+                    : tableInfos.bigBlind * 100
+                }
+              />
+            </div>
+          </div>
+        )}
       </div>
       {vencedoresRodada.length !== 0 && (
         <div>
