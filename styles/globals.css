@@ -384,7 +384,7 @@ a {
 }
 
 .donations button:hover {
-  background-color: lightgreen;
+  background-color: darkred;
 }
 
 /* ------------END-------------- */
