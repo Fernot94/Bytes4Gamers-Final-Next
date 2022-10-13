@@ -19,17 +19,17 @@ export default function Menu() {
 
   const handleLogout = () => {
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ "token": userToken })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: userToken }),
     };
-    fetch('/api/logout', options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
+    fetch("/api/logout", options)
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
 
     localStorage.clear();
-    refreshPage()
+    refreshPage();
   };
 
   const getUserAll = () => {

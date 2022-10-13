@@ -57,7 +57,7 @@ const DECK_DEFAULT = [
   { value: 10, suit: "diamonds" },
   { value: 11, suit: "diamonds" },
   { value: 12, suit: "diamonds" },
-  { value: 13, suit: "diamonds" }
+  { value: 13, suit: "diamonds" },
 ];
 const DECK_DEBUGGING = [
   { value: 13, suit: "spades" },
@@ -76,17 +76,23 @@ const DECK_DEBUGGING = [
   { value: 12, suit: "spades" },
   { value: 13, suit: "hearts" },
   { value: 2, suit: "diamonds" },
-  { value: 13, suit: "diamonds" }
-]
-const PLAYER_DEFAULT = { username: "Player", cards: ["", ""], chips: 999999 }
+  { value: 13, suit: "diamonds" },
+];
 
 export default function PokerTable() {
-  const router = useRouter()
+  const router = useRouter();
   const [userLogado, setUserLogado] = useState({ username: "" });
   const [tableInfos, setTableInfos] = useState();
+  const [jogadores, setJogadores] = useState([]);
+  const [vencedoresRodada, setVencedoresRodada] = useState([]);
+  const [deck, setDeck] = useState(DECK_DEFAULT);
+  const [flop, setFlop] = useState([]);
+  const [turn, setTurn] = useState([]);
+  const [river, setRiver] = useState([]);
+  const [seated, setSeated] = useState(false);
 
   const getUserLogado = () => {
-    const userToken = localStorage.getItem("token")
+    const userToken = localStorage.getItem("token");
     if (userToken === null || userToken === undefined) {
       return;
     }
@@ -97,88 +103,91 @@ export default function PokerTable() {
       .catch((err) => console.error(err));
   };
 
-  function updateTable() {
-    const options = { method: "GET", headers: { id: window.location.search.substring(1).split("=")[1] } };
-    fetch("/api/table", options)
+  function addPlayer(player) {
+    console.log(tableInfos);
+    // console.log(player);
+    if (
+      !tableInfos.players
+        .map((p) => p.user.username)
+        .includes(player.user.username) &&
+      tableInfos.players.length < tableInfos.maxPlayers
+    ) {
+      setTableInfos((prev) => ({
+        ...prev,
+        players: [...prev.players, player],
+      }));
+      setSeated(true);
+    }
+  }
 
+  function updateTable() {
+    const options = {
+      method: "GET",
+      headers: { id: window.location.search.substring(1).split("=")[1] },
+    };
+    fetch("/api/table", options)
       .then((response) => response.json())
       .then((response) => {
-        setJogadores(response.table.players)
-        setTableInfos(response.table)
+        setJogadores(response.table.players);
+        setTableInfos(response.table);
+        setFlop(response.table.flop);
+        setTurn(response.table.turn);
+        setRiver(response.table.river);
+        setVencedoresRodada(response.table.roundWinners);
       })
       .catch((err) => console.error(err));
   }
 
   async function updateNewTable() {
-
-
     const options = {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ jogoAtualizado: { ...tableInfos } })
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jogoAtualizado: { ...tableInfos } }),
     };
 
-    const response = await fetch('/api/table', options)
-    const json = await response.json()
-
+    const response = await fetch("/api/table", options);
+    const json = await response.json();
   }
 
   useEffect(() => {
     if (tableInfos) {
-      updateNewTable()
+      updateNewTable();
     }
   }, [tableInfos]);
 
-  
   useEffect(() => {
-    updateTable()
-    getUserLogado()
-    setInterval(updateTable, 1000)
+    updateTable();
+    getUserLogado();
+    setInterval(updateTable, 1000);
   }, []);
 
-  function adicionarCreator() {
-    setJogadores(prev => [...prev, {
-      user: {
-        username
-          :
-          "GabrielSimões",
-        email
-          :
-          "gabrielsantos@gmail.com",
-        password
-          :
-          "A1b2C3d$",
-        passwordConfirmation
-          :
-          "A1b2C3d$",
-        acceptsTerms
-          :
-          true,
-        acceptsCommunications
-          :
-          false
-      }, cards: ["", ""], tableChips: 500
-    }])
-  }
-
-  const [jogadores, setJogadores] = useState([]);
-  const [vencedoresRodada, setVencedoresRodada] = useState([]);
-  const [deck, setDeck] = useState(DECK_DEFAULT);
-  const [flop, setFlop] = useState([]);
-  const [turn, setTurn] = useState([]);
-  const [river, setRiver] = useState([]);
-
   const shuffle = () => {
-    let newDeck = DECK_DEFAULT
-    setDeck(newDeck.sort(() => Math.random() - 0.5))
-  }
+    let newDeck = DECK_DEFAULT;
+    setTableInfos((prev) => ({
+      ...prev,
+      deck: newDeck.sort(() => Math.random() - 0.5),
+    }));
+  };
 
   const deal = () => {
+    shuffle();
     for (let i = 0; i < 2 * jogadores.length; i++) {
       if (i < jogadores.length)
-        setJogadores(prev => prev.map((player, j) => j === i ? { ...player, cards: [deck[i], ""] } : player))
+        setTableInfos((prev) => ({
+          ...prev,
+          players: prev.players.map((player, j) =>
+            j === i ? { ...player, cards: [deck[i], ""] } : player
+          ),
+        }));
       else
-        setJogadores(prev => prev.map((player, j) => j === i - jogadores.length ? { ...player, cards: [player.cards[0], deck[i]] } : player))
+        setTableInfos((prev) => ({
+          ...prev,
+          players: prev.players.map((player, j) =>
+            j === i - jogadores.length
+              ? { ...player, cards: [player.cards[0], deck[i]], inRound: true }
+              : player
+          ),
+        }));
     }
   };
 
@@ -186,38 +195,76 @@ export default function PokerTable() {
      setJogadores((prev) => [...prev, { ...PLAYER_DEFAULT, username: `Player ${prev.length + 1}` }]);
    };
   */
+
+  const isSeated = () => {
+    if (!seated) setSeated(true);
+  };
+
+  const handleJoin = () => {
+    addPlayer({
+      user: userLogado,
+      cards: ["", ""],
+      tableChips: 500,
+      inRound: false,
+    });
+  };
+
   const dealFlop = () => {
     for (let i = jogadores.length * 2; i < 2 * jogadores.length + 3; i++) {
-      setFlop(prev => [...prev, deck[i]])
+      setTableInfos((prev) => ({ ...prev, flop: [...prev.flop, deck[i]] }));
     }
   };
   const dealTurn = () => {
     for (let i = 3 + jogadores.length * 2; i < 2 * jogadores.length + 4; i++) {
-      setTurn(prev => [...prev, deck[i]])
+      setTableInfos((prev) => ({ ...prev, turn: [...prev.turn, deck[i]] }));
     }
   };
   const dealRiver = () => {
     for (let i = 4 + jogadores.length * 2; i < 2 * jogadores.length + 5; i++) {
-      setRiver(prev => [...prev, deck[i]])
+      setTableInfos((prev) => ({ ...prev, river: [...prev.river, deck[i]] }));
     }
   };
 
+  const testalog = () => {
+    console.log(tableInfos);
+    console.log(vencedoresRodada);
+  };
+
   const vencedor = () => {
-    setVencedoresRodada(getWinners(flop.concat(turn).concat(river), jogadores.map(player => player.cards)))
+    setTableInfos((prev) => ({
+      ...prev,
+      roundWinners: getWinners(
+        flop.concat(turn).concat(river),
+        jogadores.map((player) => player.cards)
+      ),
+    }));
   };
 
   const getPlayerUsername = (cards) => {
-    return jogadores.find(player => player.cards[0]?.value === cards[0]?.value && player.cards[0]?.suit === cards[0]?.suit && player.cards[1]?.value === cards[1]?.value && player.cards[1]?.suit === cards[1]?.suit)?.username
-  }
+    return jogadores.find(
+      (player) =>
+        player.cards[0]?.value === cards[0]?.value &&
+        player.cards[0]?.suit === cards[0]?.suit &&
+        player.cards[1]?.value === cards[1]?.value &&
+        player.cards[1]?.suit === cards[1]?.suit
+    )?.user.username;
+  };
 
   const resetRound = () => {
-    setVencedoresRodada([])
-    setFlop([])
-    setTurn([])
-    setRiver([])
-    setJogadores(prev => prev.map(player => ({ ...player, cards: ["", ""] })))
-    shuffle()
-  }
+    setTableInfos((prev) => ({
+      ...prev,
+      roundWinner: [],
+      flop: [],
+      turn: [],
+      river: [],
+      dealer: prev.dealer >= prev.players.length ? 0 : prev.dealer + 1,
+      players: tableInfos.players.map((player) => ({
+        ...player,
+        cards: ["", ""],
+      })),
+      roundWinners: [],
+    }));
+  };
 
   return (
     <div className="mainPoker">
@@ -226,43 +273,105 @@ export default function PokerTable() {
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
               <h2>{player.user.username}</h2>
-              <div className="card1" style={{ backgroundImage: (player.cards[0] === "" || player.user.username !== userLogado.username) ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
-              <div className="card2" style={{ backgroundImage: (player.cards[1] === "" || player.user.username !== userLogado.username) ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
+              <h4>{player.tableChips}</h4>
+              <div
+                className="card1"
+                style={{
+                  backgroundImage:
+                    player.cards[0] === ""
+                      ? "none"
+                      : player.user.username !== userLogado.username
+                      ? "url(/cards-assets/back-cards.png)"
+                      : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png`,
+                }}
+              ></div>
+              <div
+                className="card2"
+                style={{
+                  backgroundImage:
+                    player.cards[1] === ""
+                      ? "none"
+                      : player.user.username !== userLogado.username
+                      ? "url(/cards-assets/back-cards.png)"
+                      : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png`,
+                }}
+              ></div>
             </div>
           ))}
         </div>
         <div className="communityCards">
           <div className="flop">
-            {flop.map((community, i) => (
-              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
-              </div>
+            {flop?.map((community, i) => (
+              <div
+                key={`Community ${i}`}
+                className="communityCard"
+                style={{
+                  backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png`,
+                }}
+              ></div>
             ))}
           </div>
           <div className="turn">
-            {turn.map((community, i) => (
-              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
-              </div>
+            {turn?.map((community, i) => (
+              <div
+                key={`Community ${i}`}
+                className="communityCard"
+                style={{
+                  backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png`,
+                }}
+              ></div>
             ))}
           </div>
           <div className="river">
-            {river.map((community, i) => (
-              <div key={`Community ${i}`} className="communityCard" style={{ backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png` }}>
-              </div>
+            {river?.map((community, i) => (
+              <div
+                key={`Community ${i}`}
+                className="communityCard"
+                style={{
+                  backgroundImage: `url(/cards-assets/${community.value}_of_${community.suit}.png`,
+                }}
+              ></div>
             ))}
           </div>
         </div>
       </div>
       <div>
-        <button onClick={() => teste()}>Teste</button>
-        <button onClick={() => adicionarCreator()}>Adicionar player</button>
+        <button onClick={() => testalog()}>Teste</button>
+        {!seated && <button onClick={() => handleJoin()}>Join</button>}
         <button onClick={() => deal()}>Deal</button>
         <button onClick={() => dealFlop()}>Deal Flop</button>
         <button onClick={() => dealTurn()}>Deal Turn</button>
         <button onClick={() => dealRiver()}>Deal River</button>
         <button onClick={() => vencedor()}>Vencedor</button>
         <button onClick={() => resetRound()}>Reset</button>
+
+        {/* {!seated && (
+          // <input
+          //   type={"range"}
+          //   id={"chips"}
+          //   onChange={() =>
+          //     setTableInfos((prev) => ({
+          //       ...prev,
+          //       bigBlind: document.getElementById("points").value,
+          //     }))
+          //   }
+          //   name={"points"}
+          //   min={tableInfos.bigBlind * 10}
+          //   max={tableInfos.bigBlind * 100}
+          // />
+        )} */}
       </div>
-      {vencedoresRodada.length !== 0 && <div>Vencerdor(es): {vencedoresRodada.map((vencedor, i) => <p key={i} >{`${getPlayerUsername(vencedor)} ${handToString(flop.concat(turn).concat(river), vencedor)}`}</p>)}</div>}
+      {vencedoresRodada.length !== 0 && (
+        <div>
+          Vencerdor(es):{" "}
+          {vencedoresRodada.map((vencedor, i) => (
+            <p key={i}>{`${getPlayerUsername(vencedor)} ${handToString(
+              flop.concat(turn).concat(river),
+              vencedor
+            )}`}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

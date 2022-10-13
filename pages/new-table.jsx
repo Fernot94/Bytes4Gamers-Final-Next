@@ -11,41 +11,48 @@ export default function NewTable() {
 
   async function setForm() {
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        players: [{ user: creator, cards: ["", ""], tableChips: playerChips }],
+        players: [],
         maxPlayers: Number(maxPlayers),
         dealer: 0,
         playerAtual: 0,
         pot: [],
         deck: [],
-        deckIndice: 0
-      })
+        deckIndice: 0,
+        flop: [],
+        turn: [],
+        river: [],
+        roundWinners: [],
+        bigBlind: Number(bigBlind),
+      }),
     };
 
-    const response = await fetch('/api/table', options)
-    const json = await response.json()
-    console.log(json)
-    router.push(`/poker-table?game=${json._id}`)
-
+    const response = await fetch("/api/table", options);
+    const json = await response.json();
+    console.log(json);
+    router.push(`/poker-table?game=${json._id}`);
   }
 
   function updateMaxPlayers() {
-    setMaxPlayers(document.getElementById("maxPlayers").value)
+    setMaxPlayers(document.getElementById("maxPlayers").value);
   }
   function updateBigBlind() {
-    const newBB = document.getElementById("bigBlind").value
-    setBigBlind(newBB)
-    setPlayerChips(String((Number(newBB) * 50)))
+    const newBB = document.getElementById("bigBlind").value;
+    setBigBlind(newBB);
+    setPlayerChips(String(Number(newBB) * 50));
   }
 
   useEffect(() => {
-    const options = { method: "GET", headers: { token: localStorage.getItem("token") } }
+    const options = {
+      method: "GET",
+      headers: { token: localStorage.getItem("token") },
+    };
     fetch("/api/login", options)
       .then((response) => response.json())
       .then((response) => setCreator(response.user))
-      .catch((err) => console.error(err))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -77,16 +84,6 @@ export default function NewTable() {
           <option value={10000}>10000</option>
         </select>
         <br />
-        <label>In game chips: {playerChips}</label>
-        <br />
-        <input
-          type={"range"}
-          id={"points"}
-          onChange={() => setPlayerChips(document.getElementById("points").value)}
-          name={"points"}
-          min={String(Number(bigBlind) * 10)}
-          max={String(Number(bigBlind) * 100)}
-        />
       </form>
       <br />
       <button onClick={() => setForm()}>Create</button>
