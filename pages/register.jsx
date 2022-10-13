@@ -8,6 +8,8 @@ export default function SignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [terms, setTerms] = useState(false);
   const [communication, setCommunication] = useState(false);
+  const [registerError, setRegisterError] = useState("");
+
 
   const setForm = () => {
     console.log(terms)
@@ -18,14 +20,24 @@ export default function SignUp() {
       body: JSON.stringify({ username: username, email: email, password: userpassword, passwordConfirmation: passwordConfirmation, acceptsTerms: terms, acceptsCommunications: communication, chips: 999999999 })
     };
 
-    fetch('http://localhost:3000/api/signup', options)
+    fetch('/api/signup', options)
       .then(response => response.json())
-      .then(response => console.log(response))
+      .then(response => handleRegister(response))
       .catch(err => console.error(err));
 
     setUserPassword("")
     setPasswordConfirmation("")
+    
   };
+  const handleRegister = (response) => {
+    if (response.message === undefined) {
+      return router.push("/home");
+    }
+    console.log(response)
+    return setRegisterError(response.message);
+  };
+
+  
 
   return (
     <div className="signupMain">
@@ -81,7 +93,8 @@ export default function SignUp() {
             onChange={(e) => setCommunication(e.target.checked)}
           />
           <label> I want to receive publicity by email from Bytes4Gamers.</label>
-          <input className="inputLogin" value={"Register"} type={"submit"} onClick={() => setForm()}></input>
+          <input className="inputLogin" value={"Register"} type={"button"} onClick={() => setForm()}></input>
+          <p>{registerError}</p>
         </form>
       </div>
     </div>

@@ -8,10 +8,11 @@ import { isLogged } from "./Login";
 import { useEffect } from "react";
 import react from "react";
 
+export function refreshPage() {
+  window.location.reload();
+}
+
 export default function Menu() {
-  function refreshPage() {
-    window.location.reload();
-  }
   const [userToken, setUserToken] = useState();
   const [user, setUser] = useState({ username: "" });
   const router = useRouter();
@@ -28,8 +29,10 @@ export default function Menu() {
       .catch(err => console.error(err));
 
     localStorage.clear();
-    refreshPage();
     router.push("/home");
+    useEffect(() => {
+      refreshPage()
+    }, [router])
   };
 
   const getUserAll = () => {

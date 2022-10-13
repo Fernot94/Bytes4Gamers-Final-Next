@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { refreshPage } from "./menu";
 export default function SignUp() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [userpassword, setUserPassword] = useState("");
@@ -27,7 +28,10 @@ export default function SignUp() {
   const handleLogin = (response) => {
     if (response.message === undefined) {
       localStorage.setItem("token", response.token);
-      return router.push("/home");
+      router.push("/home");
+      useEffect(() => {
+        refreshPage()
+      }, [router]) 
     }
     return setLoginError(response.message);
   };
