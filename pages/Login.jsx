@@ -55,11 +55,16 @@ export default function SignUp() {
             <span>Password</span>
             <i></i>
           </div>
-          <div class="links">
+          <div className="links">
             <a href="#">Forgot Password ?</a>
             <a href="#">Signup</a>
           </div>
-          <input className="inputLogin" value={"Login"} type={"submit"} onClick={() => setForm()}></input>
+          <input
+            className="inputLogin"
+            value={"Login"}
+            type={"submit"}
+            onClick={() => setForm()}
+          ></input>
         </form>
       </div>
     </div>
