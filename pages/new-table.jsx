@@ -17,6 +17,8 @@ export default function NewTable() {
         players: [],
         maxPlayers: Number(maxPlayers),
         dealer: 0,
+        playerBB: 0,
+        playerSB: 0,
         playerAtual: 0,
         pot: [],
         deck: [],

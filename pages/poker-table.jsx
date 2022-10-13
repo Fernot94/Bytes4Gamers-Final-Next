@@ -282,7 +282,11 @@ export default function PokerTable() {
       flop: [],
       turn: [],
       river: [],
-      dealer: prev.dealer >= prev.players.length ? 0 : prev.dealer + 1,
+      playerBB:
+        prev.dealer + 2 >= prev.players.length - 1 ? 0 : prev.dealer + 2,
+      playerSB:
+        prev.dealer + 1 >= prev.players.length - 1 ? 0 : prev.dealer + 1,
+      dealer: prev.dealer >= prev.players.length - 1 ? 0 : prev.dealer + 1,
       players: tableInfos.players.map((player) => ({
         ...player,
         cards: ["", ""],
@@ -407,6 +411,13 @@ export default function PokerTable() {
           </div>
         )}
       </div>
+      <h2>dealer: {tableInfos?.players[tableInfos?.dealer]?.user?.username}</h2>
+      <h3>
+        Small Blind: {tableInfos?.players[tableInfos?.playerSB]?.user?.username}
+      </h3>
+      <h1>
+        Big Blind: {tableInfos?.players[tableInfos?.playerBB]?.user?.username}
+      </h1>
       {vencedoresRodada.length !== 0 && (
         <div>
           Vencerdor(es):{" "}
