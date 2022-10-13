@@ -21,7 +21,7 @@ export default function Menu() {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ "token": localStorage.getItem("token") })
+      body: JSON.stringify({ "token": userToken })
     };
     fetch('/api/logout', options)
       .then(response => response.json())
@@ -29,11 +29,8 @@ export default function Menu() {
       .catch(err => console.error(err));
 
     localStorage.clear();
-    router.push("/home");
-  };
-  useEffect(() => {
     refreshPage()
-  }, [router]) 
+  };
 
   const getUserAll = () => {
     if (userToken === null || userToken === undefined) {

@@ -31,9 +31,6 @@ export default function SignUp() {
     if (response.message === undefined) {
       localStorage.setItem("token", response.token);
       router.push("/home");
-      useEffect(() => {
-        refreshPage()
-      }, [router]) 
     }
     return setLoginError(response.message);
   };
