@@ -1,3 +1,5 @@
+import { ObjectId } from "bson"
+
 const { getMongoCollection } = require("./mongodb")
 
 const DATABASE = "mongo-bytes4gamers"
@@ -10,7 +12,7 @@ async function addTable(table) {
 }
 async function getTableById(id) {
     const collection = await getMongoCollection(DATABASE, USER_COLLECTION)
-    const result = await collection.findOne({ id })
+    const result = await collection.findOne({ _id: ObjectId(id) })
     return result
 }
 async function getAllTables() {

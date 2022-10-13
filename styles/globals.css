@@ -528,7 +528,7 @@ body
   }
 }
 
-form {
+.loginRegister {
   position: absolute;
   inset: 2px;
   background: #28292d;

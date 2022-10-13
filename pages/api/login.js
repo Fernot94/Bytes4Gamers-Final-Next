@@ -31,7 +31,8 @@ export default async function handler(req, res) {
 
     const token = await addSession(user._id);
     res.status(200).json({ token });
-  } else if (req.method === "GET") {
+  }
+  else if (req.method === "GET") {
     const session = await getSessionByToken(req.headers.token);
     console.log(session);
     const user = await getUserById(session.username);

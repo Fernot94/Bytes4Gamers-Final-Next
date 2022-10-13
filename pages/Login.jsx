@@ -38,7 +38,7 @@ export default function SignUp() {
   return (
     <div className="signupMain">
       <div className="box">
-        <form autoComplete="off">
+        <form className="loginRegister" autoComplete="off">
           <h2>Login</h2>
           <div className="inputBox">
             <input

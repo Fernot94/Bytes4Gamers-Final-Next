@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { func } from "prop-types";
+import { useEffect, useState } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
@@ -77,7 +79,72 @@ const DECK_DEBUGGING = [
   { value: 13, suit: "diamonds" }
 ]
 const PLAYER_DEFAULT = { username: "Player", cards: ["", ""], chips: 999999 }
+
 export default function PokerTable() {
+  const router = useRouter()
+  const [userLogado, setUserLogado] = useState({ username: "" });
+  const [tableInfos, setTableInfos] = useState();
+
+  const getUserLogado = () => {
+    const userToken = localStorage.getItem("token")
+    if (userToken === null || userToken === undefined) {
+      return;
+    }
+    const options = { method: "GET", headers: { token: userToken } };
+    fetch("/api/login", options)
+      .then((response) => response.json())
+      .then((response) => setUserLogado(response.user))
+      .catch((err) => console.error(err));
+  };
+
+  function updateTable() {
+    const options = { method: "GET", headers: { id: window.location.search.substring(1).split("=")[1] } };
+    fetch("/api/table", options)
+
+      .then((response) => response.json())
+      .then((response) => {
+        setJogadores(response.table.players)
+        setTableInfos(response.table)
+      })
+      .catch((err) => console.error(err));
+
+
+
+  }
+  function teste() {
+    console.log(userLogado)
+  }
+  useEffect(() => {
+    updateTable()
+    getUserLogado()
+/*     setInterval(updateTable, 1000)
+ */  }, []);
+
+  function adicionarCreator() {
+    setJogadores(prev => [...prev, {
+      user: {
+        username
+          :
+          "GabrielSimões",
+        email
+          :
+          "gabrielsantos@gmail.com",
+        password
+          :
+          "A1b2C3d$",
+        passwordConfirmation
+          :
+          "A1b2C3d$",
+        acceptsTerms
+          :
+          true,
+        acceptsCommunications
+          :
+          false
+      }, cards: ["", ""], tableChips: 500
+    }])
+  }
+
   const [jogadores, setJogadores] = useState([]);
   const [vencedoresRodada, setVencedoresRodada] = useState([]);
   const [deck, setDeck] = useState(DECK_DEFAULT);
@@ -99,10 +166,10 @@ export default function PokerTable() {
     }
   };
 
-  const adicionaJogador = () => {
-    setJogadores((prev) => [...prev, { ...PLAYER_DEFAULT, username: `Player ${prev.length + 1}` }]);
-  };
-
+  /*  const adicionaJogador = () => {
+     setJogadores((prev) => [...prev, { ...PLAYER_DEFAULT, username: `Player ${prev.length + 1}` }]);
+   };
+  */
   const dealFlop = () => {
     for (let i = jogadores.length * 2; i < 2 * jogadores.length + 3; i++) {
       setFlop(prev => [...prev, deck[i]])
@@ -142,8 +209,9 @@ export default function PokerTable() {
         <div className="players">
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
-              <div className="card1" style={{ backgroundImage: player.cards[0] === "" ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
-              <div className="card2" style={{ backgroundImage: player.cards[1] === "" ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
+              <h2>{player.user.username}</h2>
+              <div className="card1" style={{ backgroundImage: (player.cards[0] === "" || player.user.username !== userLogado.username) ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png` }} ></div>
+              <div className="card2" style={{ backgroundImage: (player.cards[1] === "" || player.user.username !== userLogado.username) ? "url(/cards-assets/back-cards.png)" : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png` }} ></div>
             </div>
           ))}
         </div>
@@ -169,8 +237,8 @@ export default function PokerTable() {
         </div>
       </div>
       <div>
-        <button onClick={() => adicionaJogador()}>Adiciona Jogador</button>
-        <button onClick={() => shuffle()}>Shuffle</button>
+        <button onClick={() => teste()}>Teste</button>
+        <button onClick={() => adicionarCreator()}>Adicionar player</button>
         <button onClick={() => deal()}>Deal</button>
         <button onClick={() => dealFlop()}>Deal Flop</button>
         <button onClick={() => dealTurn()}>Deal Turn</button>

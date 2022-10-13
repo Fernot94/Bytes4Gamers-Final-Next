@@ -1,23 +1,59 @@
-import { useState } from "react";
+import { func } from "prop-types";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function NewTable() {
-  const [maxPlayers, setMaxPlayers] = useState(0);
-  const [bigBlind, setBigBlind] = useState(0);
-  const [playerChips, setPlayerChips] = useState(0);
+  const [maxPlayers, setMaxPlayers] = useState("2");
+  const [bigBlind, setBigBlind] = useState("10");
+  const [playerChips, setPlayerChips] = useState("500");
+  const [creator, setCreator] = useState();
+  const router = useRouter();
 
-  function setForm() {}
+  async function setForm() {
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        players: [{ user: creator, cards: ["", ""], tableChips: playerChips }],
+        maxPlayers: Number(maxPlayers),
+        dealer: 0,
+        playerAtual: 0,
+        pot: [],
+        deck: [],
+        deckIndice: 0
+      })
+    };
 
-  const onSelect = (e) => {
-    setMaxPlayers(e.target.value);
-    console.log(maxPlayers);
-  };
+    const response = await fetch('/api/table', options)
+    const json = await response.json()
+    console.log(json)
+    router.push(`/poker-table?game=${json._id}`)
+
+  }
+
+  function updateMaxPlayers() {
+    setMaxPlayers(document.getElementById("maxPlayers").value)
+  }
+  function updateBigBlind() {
+    const newBB = document.getElementById("bigBlind").value
+    setBigBlind(newBB)
+    setPlayerChips(String((Number(newBB) * 50)))
+  }
+
+  useEffect(() => {
+    const options = { method: "GET", headers: { token: localStorage.getItem("token") } }
+    fetch("/api/login", options)
+      .then((response) => response.json())
+      .then((response) => setCreator(response.user))
+      .catch((err) => console.error(err))
+  }, []);
 
   return (
     <div className="createNewTable">
       <h2>Create new table</h2>
       <form>
-        <span>Max players: </span>
-        <select onSelect={onSelect}>
+        <label>Max players: </label>
+        <select id="maxPlayers" onChange={() => updateMaxPlayers()}>
           <option value={2}>2</option>
           <option value={3}>3</option>
           <option value={4}>4</option>
@@ -28,8 +64,8 @@ export default function NewTable() {
           <option value={9}>9</option>
         </select>
         <br />
-        <span>Big Blind: </span>
-        <select onSelect={onSelect}>
+        <label>Big Blind: </label>
+        <select id="bigBlind" onChange={() => updateBigBlind()}>
           <option value={10}>10</option>
           <option value={50}>50</option>
           <option value={100}>100</option>
@@ -41,11 +77,16 @@ export default function NewTable() {
           <option value={10000}>10000</option>
         </select>
         <br />
-        <span>In game chips: </span>
+        <label>In game chips: {playerChips}</label>
+        <br />
         <input
-          onChange={(e) => setPlayerChips(e.target.value)}
-          type={"text"}
-        ></input>
+          type={"range"}
+          id={"points"}
+          onChange={() => setPlayerChips(document.getElementById("points").value)}
+          name={"points"}
+          min={String(Number(bigBlind) * 10)}
+          max={String(Number(bigBlind) * 100)}
+        />
       </form>
       <br />
       <button onClick={() => setForm()}>Create</button>

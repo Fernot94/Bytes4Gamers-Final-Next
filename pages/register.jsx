@@ -12,8 +12,6 @@ export default function SignUp() {
 
 
   const setForm = () => {
-    console.log(terms)
-    console.log(communication)
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -42,7 +40,7 @@ export default function SignUp() {
   return (
     <div className="signupMain">
       <div className="box registerBox">
-        <form>
+        <form className="loginRegister" autoComplete="off">
           <h2>Create an Account</h2>
           <div className="inputBox">
             <input
