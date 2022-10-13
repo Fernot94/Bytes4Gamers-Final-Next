@@ -17,8 +17,18 @@ export default function Menu() {
   const router = useRouter();
 
   const handleLogout = () => {
-    refreshPage();
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "token": localStorage.getItem("token") })
+    };
+    fetch('/api/logout', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+
     localStorage.clear();
+    refreshPage();
     router.push("/home");
   };
 

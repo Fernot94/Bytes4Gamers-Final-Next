@@ -362,8 +362,6 @@ a {
   align-items: center;
 }
 
-. {}
-
 .creatorsPic {
   width: 70vw;
 }
@@ -623,7 +621,7 @@ h2 {
   color: #FF3131;
 }
 
-input[type="submit"] {
+input[type="button"] {
   border: none;
   outline: none;
   padding: 11px 25px;
@@ -635,7 +633,7 @@ input[type="submit"] {
   margin-top: 10px;
 }
 
-input[type="submit"]:active {
+input[type="button"]:active {
   opacity: 0.8;
 }
 

@@ -23,4 +23,4 @@ async function deleteSession(token) {
   return result;
 }
 
-export { addSession, getSessionByToken };
+export { addSession, getSessionByToken, deleteSession };

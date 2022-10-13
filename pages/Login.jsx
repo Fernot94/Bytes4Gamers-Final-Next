@@ -61,10 +61,9 @@ export default function SignUp() {
           </div>
           <input
             className="inputLogin"
+            type={"button"}
             value={"Login"}
-            type={"submit"}
-            onClick={() => setForm()}
-          ></input>
+            onClick={() => setForm()} />
         </form>
       </div>
     </div>
