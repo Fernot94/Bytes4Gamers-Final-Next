@@ -20,9 +20,10 @@ async function getAllTables() {
     const result = await collection.find().toArray()
     return result
 }
-async function updateTable(id) {
+async function updateTable(id, data) {
+    console.log(id, data)
     const collection = await getMongoCollection(DATABASE, USER_COLLECTION)
-    const result = await collection.updateOne({sku: sku}, {$set: data})
+    const result = await collection.updateOne({_id: ObjectId(id)}, {$set: {...data}})
     return result
 }
 

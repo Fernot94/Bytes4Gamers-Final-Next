@@ -1,5 +1,5 @@
 import { insertUser } from "../../src/backend-data/authentication";
-import { addTable, getTableById } from "../../src/backend-data/tables";
+import { addTable, getTableById, updateTable } from "../../src/backend-data/tables";
 import { validateFields } from "../../src/backend-services/validations";
 
 export default async function handler(req, res) {
@@ -11,8 +11,15 @@ export default async function handler(req, res) {
     })
   }
   else if (req.method === "GET") {
-  const table = await getTableById(req.headers.id);
-  console.log(table)
+    const table = await getTableById(req.headers.id);
+    return res.status(200).json({ table: table });
+  }
+  else if (req.method === "PATCH") {
+    const { jogoAtualizado } = req.body
+    console.log(jogoAtualizado)
+    const gameId = jogoAtualizado._id
+    delete jogoAtualizado._id
+    const table = await updateTable(gameId, jogoAtualizado);
     return res.status(200).json({ table: table });
   }
 }

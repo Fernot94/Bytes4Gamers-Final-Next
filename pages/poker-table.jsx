@@ -107,18 +107,24 @@ export default function PokerTable() {
         setTableInfos(response.table)
       })
       .catch((err) => console.error(err));
-
-
-
   }
-  function teste() {
-    console.log(userLogado)
+
+  async function teste() {
+    const options = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({jogoAtualizado: {_id: tableInfos._id, cao: "SUIGA"}})
+    };
+
+    const response = await fetch('/api/table', options)
+    const json = await response.json()
+
   }
   useEffect(() => {
     updateTable()
     getUserLogado()
-/*     setInterval(updateTable, 1000)
- */  }, []);
+    setInterval(updateTable, 1000)
+  }, []);
 
   function adicionarCreator() {
     setJogadores(prev => [...prev, {
