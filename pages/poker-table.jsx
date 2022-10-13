@@ -109,17 +109,27 @@ export default function PokerTable() {
       .catch((err) => console.error(err));
   }
 
-  async function teste() {
+  async function updateNewTable() {
+
+
     const options = {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({jogoAtualizado: {_id: tableInfos._id, cao: "SUIGA"}})
+      body: JSON.stringify({ jogoAtualizado: { ...tableInfos } })
     };
 
     const response = await fetch('/api/table', options)
     const json = await response.json()
 
   }
+
+  useEffect(() => {
+    if (tableInfos) {
+      updateNewTable()
+    }
+  }, [tableInfos]);
+
+  
   useEffect(() => {
     updateTable()
     getUserLogado()
