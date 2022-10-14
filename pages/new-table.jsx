@@ -49,7 +49,7 @@ export default function NewTable() {
   useEffect(() => {
     const options = {
       method: "GET",
-      headers: { token: localStorage.getItem("token") },
+      headers: { token: localStorage("token") },
     };
     fetch("/api/login", options)
       .then((response) => response.json())
