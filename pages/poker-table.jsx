@@ -286,10 +286,10 @@ export default function PokerTable() {
       turn: [],
       river: [],
       playerBB:
-        prev.dealer + 2 >= prev.players.length - 1 ? 0 : prev.dealer + 2,
+        prev.playerSB + 2 === prev.players.length ? 0 : (prev.playerSB + 2 === prev.players.length + 1 ? 1 : prev.playerSB + 2),
       playerSB:
-        prev.dealer + 1 >= prev.players.length - 1 ? 0 : prev.dealer + 1,
-      dealer: prev.dealer >= prev.players.length - 1 ? 0 : prev.dealer + 1,
+        prev.dealer + 2 === prev.players.length ? 0 : (prev.dealer + 2 === prev.players.length + 1 ? 1 : prev.dealer + 2),
+      dealer: prev.dealer + 1 >= prev.players.length ? 0 : prev.dealer + 1,
       players: tableInfos.players.map((player) => ({
         ...player,
         cards: ["", ""],
@@ -305,33 +305,33 @@ export default function PokerTable() {
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
               <div className="insidePlayer">
-              <h2>{player.user.username}</h2>
-              <img src={chipsimage} alt="chips"/>
-              <h4>{player.tableChips}</h4>
-            </div>
+                <h2>{player.user.username}</h2>
+                <img src={chipsimage} alt="chips" />
+                <h4>{player.tableChips}</h4>
+              </div>
               <div className="twoCards">
-              <div
-                className="card1"
-                style={{
-                  backgroundImage:
-                    player.cards[0] === ""
-                      ? "none"
-                      : player.user.username !== userLogado.username
-                      ? "url(/cards-assets/back-cards.png)"
-                      : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png`,
-                }}
-              ></div>
-              <div
-                className="card2"
-                style={{
-                  backgroundImage:
-                    player.cards[1] === ""
-                      ? "none"
-                      : player.user.username !== userLogado.username
-                      ? "url(/cards-assets/back-cards.png)"
-                      : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png`,
-                }}
-              ></div>
+                <div
+                  className="card1"
+                  style={{
+                    backgroundImage:
+                      player.cards[0] === ""
+                        ? "none"
+                        : player.user.username !== userLogado.username
+                          ? "url(/cards-assets/back-cards.png)"
+                          : `url(/cards-assets/${player.cards[0].value}_of_${player.cards[0].suit}.png`,
+                  }}
+                ></div>
+                <div
+                  className="card2"
+                  style={{
+                    backgroundImage:
+                      player.cards[1] === ""
+                        ? "none"
+                        : player.user.username !== userLogado.username
+                          ? "url(/cards-assets/back-cards.png)"
+                          : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png`,
+                  }}
+                ></div>
               </div>
             </div>
           ))}
