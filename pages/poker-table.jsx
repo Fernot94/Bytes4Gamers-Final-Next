@@ -286,9 +286,9 @@ export default function PokerTable() {
       turn: [],
       river: [],
       playerBB:
-        prev.playerSB + 2 === prev.players.length ? 0 : (prev.playerSB + 2 === prev.players.length + 1 ? 1 : prev.playerSB + 2),
+        prev.players.length === 2 ? (prev.dealer === 0 ? 0 : 1) : (prev.playerSB + 2 === prev.players.length ? 0 : (prev.playerSB + 2 === prev.players.length + 1 ? 1 : prev.playerSB + 2)),
       playerSB:
-        prev.dealer + 2 === prev.players.length ? 0 : (prev.dealer + 2 === prev.players.length + 1 ? 1 : prev.dealer + 2),
+        prev.players.length === 2 ? (prev.dealer + 1 >= prev.players.length ? 0 : prev.dealer + 1) : (prev.dealer + 2 === prev.players.length ? 0 : (prev.dealer + 2 === prev.players.length + 1 ? 1 : prev.dealer + 2)),
       dealer: prev.dealer + 1 >= prev.players.length ? 0 : prev.dealer + 1,
       players: tableInfos.players.map((player) => ({
         ...player,
@@ -375,7 +375,7 @@ export default function PokerTable() {
       <div>
         <Link href={"/poker-menu"}>
           <a>
-            <button>Go back</button>
+            <button className="backButton">Go back</button>
           </a>
         </Link>
         {seated && (

@@ -4,6 +4,8 @@ import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from "next/link";
 import { useEffect } from "react";
+import { isLogged } from "./login";
+
 
 export default function PokerMenu(props) {
   const [tables, setTables] = useState([]);

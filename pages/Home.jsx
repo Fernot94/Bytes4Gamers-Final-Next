@@ -1,21 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from 'next/link'
 
 export default function Home() {
+  const [isLogged, setIsLogged] = useState()
+  
+  useEffect(() => {
+    setIsLogged(localStorage.length > 0)
+  }, []);
+
   return (
     <div className="mainHome">
       <h2>Games</h2>
       <div className="games">
         <div className="poker">
-          <Link href="/poker-menu">
+          <Link href={isLogged ? "/poker-menu" : ""}>
             <a>
               <img
                 src="/games-assets/poker.jpg"
                 alt="Poker Game"
-                className="gamePokerImg"
+                className={isLogged? "gamePokerImg" : "disableGames"}
               />
               <h3>Poker Texas Hold'em</h3>
             </a>
@@ -46,12 +52,12 @@ export default function Home() {
           <h3>Blackjack</h3>
         </div>
         <div className="ticTacToe">
-          <Link href="/tic-tac-toe">
+          <Link href={isLogged ? "/tic-tac-toe" : ""}>
             <a>
               <img
                 src="/games-assets/tic-tac-toe.jpg"
                 alt="Tic Tac Toe"
-                className="gamePokerImg"
+                className={isLogged ? "gamePokerImg" : "disableGames"}
               />
               <h3>Tic Tac Toe</h3>
             </a>
