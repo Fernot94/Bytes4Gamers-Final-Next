@@ -823,8 +823,8 @@ input[type="button"]:active {
 }
 /* ------------END-------------- */
 
-.goBackButton,
-.goBackButton:after {
+.backButton,
+.backButton:after {
   width: 150px;
   height: 76px;
   line-height: 78px;
@@ -845,7 +845,7 @@ input[type="button"]:active {
   left: 20px;
 }
 
-.goBackButton::after {
+.backButton::after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
   --slice-2: inset(50% -6px 30% 0);
@@ -865,7 +865,7 @@ input[type="button"]:active {
   clip-path: var(--slice-0);
 }
 
-.goBackButton:hover::after {
+.backButton:hover::after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
