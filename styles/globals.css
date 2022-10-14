@@ -249,7 +249,6 @@ a {
   --size: 6vw;
   width: var(--size);
   height: calc(var(--size) * 726 / 500);
-
 }
 
 .card2 {
