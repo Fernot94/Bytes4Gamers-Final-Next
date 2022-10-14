@@ -6,7 +6,6 @@ export default function NewTable() {
   const [maxPlayers, setMaxPlayers] = useState("2");
   const [bigBlind, setBigBlind] = useState("10");
   const [playerChips, setPlayerChips] = useState("500");
-  const [creator, setCreator] = useState();
   const router = useRouter();
 
   async function setForm() {
@@ -45,17 +44,6 @@ export default function NewTable() {
     setBigBlind(newBB);
     setPlayerChips(String(Number(newBB) * 50));
   }
-
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: { token: localStorage("token") },
-    };
-    fetch("/api/login", options)
-      .then((response) => response.json())
-      .then((response) => setCreator(response.user))
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <div className="createNewTable">
