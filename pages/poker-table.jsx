@@ -6,7 +6,6 @@ import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from "next/link";
-import chipsimage from '../public/chips-assets/conjunto-100-ficha.png'
 
 const DECK_DEFAULT = [
   { value: 1, suit: "hearts" },
@@ -81,6 +80,17 @@ const DECK_DEBUGGING = [
   { value: 2, suit: "diamonds" },
   { value: 13, suit: "diamonds" },
 ];
+const playerPosition = new Map([
+  [1, [[800, 800]]],
+  [2, [[160, 500], [1250, 320]]],
+  [3, [[620, 670], [320, 190], [920, 190]]],
+  [4, [[320, 670], [320, 190], [920, 190], [920, 670]]],
+  [5, [[470, 670], [130, 300], [620, 190], [1100, 300], [770, 670]]],
+  [6, [[470, 670], [100, 450], [470, 190], [770, 190], [1130, 450], [770, 670]]],
+  [7, [[470, 670], [100, 450], [470, 190], [770, 190], [1130, 450], [770, 670], [100, 350]]],
+  [8, [[470, 670], [100, 550], [100, 350], [470, 190], [770, 190], [1130, 450], [1130, 550], [770, 670]]],
+  [9, [[470, 670], [100, 550], [100, 350], [470, 190], [770, 190], [1130, 450], [1130, 550], [770, 670], 770, 470]],
+])
 
 export default function PokerTable() {
   const router = useRouter();
@@ -108,18 +118,17 @@ export default function PokerTable() {
   };
 
   function addPlayer(player) {
-    console.log(tableInfos);
-    if (
-      !tableInfos.players
-        .map((p) => p.user.username)
-        .includes(player.user.username) &&
-      tableInfos.players.length < tableInfos.maxPlayers
-    ) {
-      setTableInfos((prev) => ({
-        ...prev,
-        players: [...prev.players, player],
-      }));
-    }
+    /*     if (
+          !tableInfos.players
+            .map((p) => p.user.username)
+            .includes(player.user.username) &&
+          tableInfos.players.length < tableInfos.maxPlayers
+        ) { */
+    setTableInfos((prev) => ({
+      ...prev,
+      players: [...prev.players, player],
+    }));
+
   }
 
   function updateTable() {
@@ -196,13 +205,6 @@ export default function PokerTable() {
         }));
     }
   };
-
-  /*  const adicionaJogador = () => {
-     setJogadores((prev) => [...prev, { ...PLAYER_DEFAULT, username: `Player ${prev.length + 1}` }]);
-   };
-  */
-
-
 
   const handleJoin = () => {
     addPlayer({
@@ -297,11 +299,17 @@ export default function PokerTable() {
       <div className="table">
         <div className="players">
           {jogadores.map((player, i) => (
-            <div className="player" key={`Player ${i}`}>
+            <div className="player" key={`Player ${i}`}
+              style={tableInfos ? {
+                left: `${playerPosition.get(tableInfos.players.length)[i][0]}px`,
+                top: `${playerPosition.get(tableInfos.players.length)[i][1]}px`
+              } : {}} >
               <div className="insidePlayer">
-                <h2>{player.user.username}</h2>
-                <img src={chipsimage} alt="chips" />
-                <h4>{player.tableChips}</h4>
+                <h2 className="playerNameTable">{player.user.username}</h2>
+                <div className="playerChipsBox">
+                  <img src={'/chips-assets/ficha-gold-As.png'} className={'playerChipIcon'} alt="chips" />
+                  <h4>{player.tableChips}</h4>
+                </div>
               </div>
               <div className="twoCards">
                 <div
@@ -380,11 +388,11 @@ export default function PokerTable() {
             <button onClick={() => dealRiver()}>Deal River</button>
             <button onClick={() => vencedor()}>Vencedor</button>
             <button onClick={() => resetRound()}>New Round</button>
-{/*             <button onClick={() => fold()}>Fold</button>
+            {/*             <button onClick={() => fold()}>Fold</button>
  */}            <button onClick={() => sitOut()}>Leave Table</button>
           </div>
         )}
-        {!seated && (
+        {/* !seated &&  */(
           <div>
             <button onClick={() => handleJoin()}>Join</button>
             <div className="joinChips">

@@ -246,7 +246,7 @@ a {
   justify-content: center;
   background-repeat: no-repeat;
   background-size: contain;
-  --size: 6vw;
+  --size: 5vw;
   width: var(--size);
   height: calc(var(--size) * 726 / 500);
 }
@@ -258,19 +258,9 @@ a {
   justify-content: center;
   background-repeat: no-repeat;
   background-size: contain;
-  --size: 6vw;
+  --size: 5vw;
   width: var(--size);
   height: calc(var(--size) * 726 / 500)
-}
-
-.twoCards {
-  display: flex;
-  flex-direction: row;
-  z-index: -100;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  top: 40px;
 }
 
 .communityCards {
@@ -316,21 +306,7 @@ a {
   height: calc(var(--size) * 726 / 500);
 }
 
-.insidePlayer {
-  display: flex;
-  gap: 8px;
-  flex-direction: column;
-  border-radius: 60px;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  background-color: black;
-  height: 80px;
-  width: 150px;
-  top: 60px;
-  right: -45px;
-  justify-content: space-between;
-}
+
 
 .players {
   display: flex;
@@ -344,14 +320,25 @@ a {
 
 .player {
   display: flex;
-  flex-direction: row;
-  gap: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1c1c1c;
+  height: 90px;
+  width: 200px;
+  border-radius: 60px;
+  position: relative;
+
+}
+.twoCards{
   display: flex;
   flex-direction: row;
-  border-radius: 60px;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: -10;
+  top: -87px;
 }
 
 .table {
@@ -365,6 +352,29 @@ a {
   --size: 80vw;
   width: var(--size);
   height: calc(var(--size) * 357 / 612);
+  z-index: -30;
+}
+
+.insidePlayer{
+  position: relative;
+  top: 66px;
+  justify-content: space-between;
+
+}
+
+.playerNameTable{
+  margin: 0;
+}
+.playerChipIcon {
+  width: 30px;
+}
+
+.playerChipsBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 /* ------------END-------------- */
@@ -913,3 +923,5 @@ input[type="button"]:active {
 }
 
 /* ------------END-------------- */
+
+
