@@ -119,7 +119,6 @@ export default function PokerTable() {
         ...prev,
         players: [...prev.players, player],
       }));
-      setSeated(true);
     }
   }
 
@@ -141,6 +140,7 @@ export default function PokerTable() {
       .catch((err) => console.error(err));
   }
 
+
   async function updateNewTable() {
     const options = {
       method: "PATCH",
@@ -154,6 +154,7 @@ export default function PokerTable() {
 
   useEffect(() => {
     if (tableInfos) {
+      setSeated(tableInfos.players.map(player => player.user.username).includes(userLogado.username))
       updateNewTable();
     }
   }, [tableInfos]);
@@ -201,9 +202,7 @@ export default function PokerTable() {
    };
   */
 
-  const isSeated = () => {
-    if (!seated) setSeated(true);
-  };
+
 
   const handleJoin = () => {
     addPlayer({
@@ -221,7 +220,6 @@ export default function PokerTable() {
         (player) => player.user.username !== userLogado.username
       ),
     }));
-    setSeated(false);
   };
 
   const dealFlop = () => {
@@ -382,8 +380,8 @@ export default function PokerTable() {
             <button onClick={() => dealRiver()}>Deal River</button>
             <button onClick={() => vencedor()}>Vencedor</button>
             <button onClick={() => resetRound()}>New Round</button>
-            <button onClick={() => fold()}>Fold</button>
-            <button onClick={() => sitOut()}>Leave Table</button>
+{/*             <button onClick={() => fold()}>Fold</button>
+ */}            <button onClick={() => sitOut()}>Leave Table</button>
           </div>
         )}
         {!seated && (
@@ -413,13 +411,13 @@ export default function PokerTable() {
           </div>
         )}
       </div>
-      <h2>dealer: {tableInfos?.players[tableInfos?.dealer]?.user?.username}</h2>
+      {/* <h2>dealer: {tableInfos?.players[tableInfos?.dealer]?.user?.username}</h2>
       <h3>
         Small Blind: {tableInfos?.players[tableInfos?.playerSB]?.user?.username}
       </h3>
       <h1>
         Big Blind: {tableInfos?.players[tableInfos?.playerBB]?.user?.username}
-      </h1>
+      </h1> */}
       {vencedoresRodada.length !== 0 && (
         <div>
           Vencerdor(es):{" "}
