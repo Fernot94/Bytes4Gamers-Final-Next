@@ -1,6 +1,7 @@
 import { func } from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function NewTable() {
   const [maxPlayers, setMaxPlayers] = useState("2");
@@ -77,6 +78,11 @@ export default function NewTable() {
       </form>
       <br />
       <button onClick={() => setForm()}>Create</button>
+      <Link href={"/poker-menu"}>
+        <a>
+          <button className="backButton">Go back</button>
+        </a>
+      </Link>
     </div>
   );
 }

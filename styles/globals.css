@@ -454,36 +454,42 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 .gettingStarted {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 .dealingCards {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 .showdown {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 .bettingLimits {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 .tableStakes {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 120px;
 }
 
 /* ------------END-------------- */
@@ -869,3 +875,13 @@ input[type="button"]:active {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
+
+/* ------------END-------------- */
+
+/* create new table */
+
+.createNewTable{
+  
+}
+
+/* ------------END-------------- */
