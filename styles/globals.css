@@ -676,4 +676,43 @@ input[type="button"]:active {
 
 /* Poker Menu */
 
+.tables{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.menuButton {
+  display: flex;
+  margin: 10px;
+  background-color: darkred;
+  border: none;
+  height: 50px;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.createTableButton {
+  display: flex;
+  margin: 10px;
+  background-color: darkred;
+  border: none;
+  height: 50px;
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; 
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
 /* ------------END-------------- */
