@@ -174,7 +174,7 @@ export default function PokerTable() {
   };
 
   const deal = () => {
-    shuffle();
+    let newDeck = DECK_DEFAULT;
     for (let i = 0; i < 2 * jogadores.length; i++) {
       if (i < jogadores.length)
         setTableInfos((prev) => ({
@@ -182,6 +182,7 @@ export default function PokerTable() {
           players: prev.players.map((player, j) =>
             j === i ? { ...player, cards: [deck[i], ""] } : player
           ),
+          deck: newDeck.sort(() => Math.random() - 0.5)
         }));
       else
         setTableInfos((prev) => ({
@@ -249,11 +250,6 @@ export default function PokerTable() {
     for (let i = 4 + jogadores.length * 2; i < 2 * jogadores.length + 5; i++) {
       setTableInfos((prev) => ({ ...prev, river: [...prev.river, deck[i]] }));
     }
-  };
-
-  const testalog = () => {
-    console.log(tableInfos);
-    // console.log(vencedoresRodada);
   };
 
   const vencedor = () => {
@@ -380,18 +376,16 @@ export default function PokerTable() {
         </Link>
         {seated && (
           <div>
-            <button onClick={() => testalog()}>Teste</button>
-            <button onClick={() => deal()}>Deal</button>
+            <button onClick={() => deal()}>Deal Player Cards</button>
             <button onClick={() => dealFlop()}>Deal Flop</button>
             <button onClick={() => dealTurn()}>Deal Turn</button>
             <button onClick={() => dealRiver()}>Deal River</button>
             <button onClick={() => vencedor()}>Vencedor</button>
-            <button onClick={() => resetRound()}>Reset</button>
+            <button onClick={() => resetRound()}>New Round</button>
             <button onClick={() => fold()}>Fold</button>
             <button onClick={() => sitOut()}>Leave Table</button>
           </div>
         )}
-        {/* && tableInfos?.maxPlayers < tableInfos?.players.length */}
         {!seated && (
           <div>
             <button onClick={() => handleJoin()}>Join</button>
