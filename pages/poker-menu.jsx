@@ -26,7 +26,7 @@ export default function PokerMenu(props) {
           <div key={`Table: ${i}`}>
             <Link href={`/poker-table?game=${table._id}`}>
               <a>
-                <button>
+                <button className="menuButton">
                   {`Table: ${i + 1} Players: ${table.players.length}/${
                     table.maxPlayers
                   }`}

@@ -1,3 +1,4 @@
+import react from "react";
 import { useRouter } from "next/router";
 import { func } from "prop-types";
 import { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import { Deck } from "../src/deck";
 import { getWinners } from "../src/drawsValidations";
 import { handToString } from "../src/rules";
 import Link from "next/link";
+import chipsimage from '../public/chips-assets/conjunto-100-ficha.png'
 
 const DECK_DEFAULT = [
   { value: 1, suit: "hearts" },
@@ -159,7 +161,8 @@ export default function PokerTable() {
   useEffect(() => {
     updateTable();
     getUserLogado();
-    setInterval(updateTable, 1000);
+    const interval = setInterval(updateTable, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const shuffle = () => {
@@ -301,8 +304,12 @@ export default function PokerTable() {
         <div className="players">
           {jogadores.map((player, i) => (
             <div className="player" key={`Player ${i}`}>
+              <div className="insidePlayer">
               <h2>{player.user.username}</h2>
+              <img src={chipsimage} alt="chips"/>
               <h4>{player.tableChips}</h4>
+            </div>
+              <div className="twoCards">
               <div
                 className="card1"
                 style={{
@@ -325,6 +332,7 @@ export default function PokerTable() {
                       : `url(/cards-assets/${player.cards[1].value}_of_${player.cards[1].suit}.png`,
                 }}
               ></div>
+              </div>
             </div>
           ))}
         </div>
