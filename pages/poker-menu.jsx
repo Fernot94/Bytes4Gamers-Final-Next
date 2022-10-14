@@ -38,7 +38,7 @@ export default function PokerMenu(props) {
       </div>
       <Link href="/new-table">
         <a>
-          <button className="createTableButton">Create new table</button>
+          <button className="createTableButton">Create Table</button>
         </a>
       </Link>
     </div>
